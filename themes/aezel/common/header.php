@@ -16,9 +16,6 @@
 
     <?php echo auto_discovery_link_tags(); ?>
 
-    <!-- Determine color and logo -->
-    <?php $style = get_color();?>
-
     <!-- Plugin Stuff -->
     <?php fire_plugin_hook('public_head', array('view'=>$this)); ?>
 
@@ -28,7 +25,7 @@
 
     <!-- Stylesheets -->
     <?php
-    queue_css_file(array('iconfonts','style.min',$style["kleur"]));
+    queue_css_file(array('iconfonts','style.min'));
     echo head_css();
 
     echo theme_header_background();
@@ -53,7 +50,7 @@
             <button class="navbar-toggler pull-xs-right navbar-text hidden-lg-up navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               &#9776;
             </button>
-            <?php echo link_to_home_page("<img src='".img("/logos/".$style["logo"].".png")."'>".option('site_title'), array('class'=>'navbar-brand')); ?>
+            <?php echo link_to_home_page("<img src='".img("/logos/book_logo.png")."'>".option('site_title'), array('class'=>'navbar-brand')); ?>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse pull-xs-left navbar-toggleable-md collapse" id="navbarSupportedContent">

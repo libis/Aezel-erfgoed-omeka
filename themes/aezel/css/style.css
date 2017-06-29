@@ -6485,18 +6485,10 @@ hr {
   color: #fff;
 }
 
-.jumbotron .logo {
-  height: 120px;
-  margin: 0 20px 10px 0;
-  float: left;
-  background: #fff;
-}
-
 .jumbotron p {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   overflow: hidden;
-  min-height: 120px;
 }
 
 .jumbotron .jumbo-lees-meer {
@@ -6528,7 +6520,6 @@ hr {
 
 .jumbotron .kijker .carousel-wrap .carousel {
   height: auto;
-  height: 400px;
   overflow: hidden;
 }
 
@@ -6569,9 +6560,21 @@ hr {
   box-shadow: none;
 }
 
+@media (max-width: 543px) {
+  .jumbotron .kijker #right .well {
+    padding: 1rem;
+  }
+}
+
 .jumbotron .kijker #right .well h1 {
   font-size: 2em;
   margin-bottom: 0.5em;
+}
+
+@media (max-width: 991px) {
+  .jumbotron .kijker #right .well h1 {
+    font-size: 1.5em;
+  }
 }
 
 .jumbotron .kijker #right .well h1 a {
@@ -6591,6 +6594,22 @@ hr {
   font-family: "Lato", sans-serif;
 }
 
+.jumbotron .kijker #right .link-to-all {
+  font-family: "Lato", sans-serif;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.jumbotron .kijker #right .link-to-all a {
+  font-weight: 500;
+}
+
+.jumbotron .kijker #right .link-to-all a:hover {
+  text-decoration: none;
+}
+
 section.about {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -6598,7 +6617,7 @@ section.about {
 
 section.about .intro img {
   width: 100%;
-  margin-bottom: 0.5em;
+  margin-bottom: 1.5em;
 }
 
 section.about .intro h3 {
@@ -6674,6 +6693,7 @@ section.eigen .eigen-verhaal .pencil {
 
 section.eigen .eigen-verhaal a, section.eigen .eigen-verhaal a:hover {
   color: white;
+  text-decoration: none;
 }
 
 section.eigen .eigen-verhaal .lees-meer a {
@@ -6696,6 +6716,11 @@ section.eigen .eigen-verhaal img {
   width: 100%;
   filter: alpha(opacity=95);
   /* For IE8 and earlier */
+}
+
+section.eigen .eigen-verhaal .img-in-text {
+  width: 20%;
+  padding: 10px 10px 3px 0;
 }
 
 .section-icons {
@@ -6824,6 +6849,12 @@ section.eigen .eigen-verhaal img {
   font-size: 1.1rem;
 }
 
+@media (max-width: 543px) {
+  .container .content {
+    padding: 1em;
+  }
+}
+
 .container .content h1 {
   font-size: 2em;
   text-transform: none;
@@ -6850,6 +6881,14 @@ section.eigen .eigen-verhaal img {
   border-left: 3px solid #e8393a;
 }
 
+@media (max-width: 767px) {
+  .container .simple-nav {
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(232, 57, 58, 0.3);
+  }
+}
+
 .container .simple-nav li {
   padding: 0.3em 0;
   border-bottom: 1px solid #f39495;
@@ -6859,53 +6898,77 @@ section.eigen .eigen-verhaal img {
   border: none;
 }
 
-.exhibits .content {
-  padding: 0;
+/*general stuff*/
+#solr-search-form, #search-form-exhibit {
+  padding-bottom: 2rem;
 }
 
-.exhibits .content img {
+#solr-search-form button[type="submit"], #search-form-exhibit button[type="submit"] {
+  background: #e8393a;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  color: white;
+  border: none;
+  padding: 0 9px;
+  height: 2.2rem;
+  font-size: 0.9rem;
+  border-radius: 0 2px 2px 0;
+}
+
+#solr-search-form input[type="text"], #search-form-exhibit input[type="text"] {
+  border: 1px solid rgba(232, 57, 58, 0.8);
+  padding: 6px;
+  height: 2.2rem;
+  border-radius: 2px;
+  font-family: sans-serif;
+}
+
+.sub-nav {
+  margin-bottom: 3rem;
+  font-family: "Lato", sans-serif;
+}
+
+.sub-nav a, .sub-nav a:hover {
+  margin-right: 10px;
+  padding-bottom: 0.3rem;
+  font-weight: bold;
+  border-bottom: 2px solid rgba(232, 57, 58, 0.8);
+  text-decoration: none;
+}
+
+/*end general*/
+.exhibits #content img {
   width: 100%;
   margin-bottom: 20px;
 }
 
-.exhibits .browse {
-  padding-top: 3rem;
-}
-
-.exhibits .secondary-nav {
-  clear: both;
-  overflow: auto;
-}
-
-.exhibits .lees-meer {
-  text-align: right;
-  font-family: "Lato", sans-serif;
-  font-style: italic;
-  padding-bottom: 1rem;
-}
-
-.exhibits .top {
-  padding: 3rem 0 1rem 0;
-}
-
 .exhibits #content .nav {
   font-size: 1.3em;
-  margin: 0;
+  margin: 2em 0;
   padding: 0.6em 1em;
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-style: italic;
   font-weight: bold;
   border-left: 3px solid #e8393a;
 }
 
+@media (max-width: 767px) {
+  .exhibits #content .nav {
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(232, 57, 58, 0.3);
+  }
+}
+
 .exhibits #content .nav h4 {
   font-weight: bold;
-  font-size: 1.3rem !important;
+  font-family: "Lato", sans-serif;
+  font-size: 1.4rem !important;
 }
 
 .exhibits #content .nav ul {
   margin: 0 !important;
   padding: 0 !important;
+  font-style: italic;
   list-style: none;
   font-weight: 200;
 }
@@ -6919,33 +6982,23 @@ section.eigen .eigen-verhaal img {
   border: none;
 }
 
+.exhibits .browse {
+  padding-top: 3rem;
+}
+
+.exhibits .browse h2 {
+  font-weight: bold;
+}
+
+.exhibits .lees-meer {
+  text-align: right;
+  font-family: "Lato", sans-serif;
+  font-style: italic;
+  padding-bottom: 1rem;
+}
+
 .solr-container .content {
   padding: 3rem 0;
-}
-
-.solr-container #solr-search-form {
-  padding-bottom: 2rem;
-}
-
-.solr-container #solr-search-form input[type="submit"] {
-  background: #e8393a;
-  text-transform: uppercase;
-  font-family: sans-serif;
-  color: white;
-  border: none;
-  padding: 0 9px;
-  height: 2.2rem;
-  font-size: 0.9rem;
-  border-radius: 2px;
-}
-
-.solr-container #solr-search-form input[type="text"] {
-  border: 1px solid rgba(232, 57, 58, 0.8);
-  padding: 6px;
-  height: 2.2rem;
-  min-width: 250px;
-  border-radius: 2px;
-  font-family: sans-serif;
 }
 
 .solr-container h2 {
@@ -6956,32 +7009,115 @@ section.eigen .eigen-verhaal img {
 }
 
 .solr-container .result {
-  padding: 2rem;
   background: rgba(102, 102, 102, 0.05);
   border-bottom: 2px solid #fff;
-}
-
-.solr-container .result .col-img {
-  padding: 0;
+  padding-top: 2rem;
+  overflow: auto;
 }
 
 .solr-container .result img {
   width: 100%;
+  padding-bottom: 1rem;
 }
 
 .solr-container .result .result-title {
   font-size: 1.2rem;
 }
 
-.solr-container #solr-facets strong {
+.solr-container #solr-applied-facets ul {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 10px;
+  list-style-type: none;
+  line-height: 1.2rem;
+}
+
+.solr-container #solr-applied-facets ul li {
+  background: #e8393a;
+  border-radius: 5px;
+  width: auto;
+  display: inline-block;
+  margin: 0 15px 25px 0;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
+  vertical-align: middle;
+  line-height: 1.2rem;
 }
 
-.solr-container #solr-facets ul {
+@media (max-width: 543px) {
+  .solr-container #solr-applied-facets ul li {
+    margin: 0 15px 15px 0;
+  }
+}
+
+.solr-container #solr-applied-facets ul li a {
+  color: #fff;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+}
+
+.solr-container #solr-applied-facets ul li a i {
+  line-height: 1.2rem;
+  vertical-align: middle;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.solr-container #solr-applied-facets ul li a:hover {
+  text-decoration: none;
+}
+
+.solr-container #solr-facets {
+  margin-bottom: 2rem;
+}
+
+.solr-container #solr-facets .facet:first-of-type {
+  border-top: 1px solid #eee;
+}
+
+.solr-container #solr-facets .facet {
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+}
+
+.solr-container #solr-facets .facet strong {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.solr-container #solr-facets .facet .facet-name {
+  color: #666;
+}
+
+.solr-container #solr-facets .facet .facet-name:hover, .solr-container #solr-facets .facet .facet-name:focus {
+  text-decoration: none;
+}
+
+.solr-container #solr-facets .facet .facet-name::before {
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 18px;
+  display: inline-block;
+}
+
+.solr-container #solr-facets .facet .facet-name[aria-expanded="true"]::before {
+  content: '-';
+}
+
+.solr-container #solr-facets .facet .facet-name[aria-expanded="false"]::before {
+  content: '+';
+}
+
+.solr-container #solr-facets .facet ul {
   margin: 5px 0;
+  list-style: none;
+  margin-left: 0.3rem;
+  padding-left: 0.6rem;
 }
 
-.solr-container #solr-facets ul li {
+.solr-container #solr-facets .facet ul li {
   font-size: 1rem;
 }
 

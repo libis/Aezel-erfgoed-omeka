@@ -2,42 +2,34 @@
 <section class="metadata-section general-section exhibit-show-section">
   <div id="content" class='container' role="main" tabindex="-1">
       <div class="row ">
-        <div class="col-sm-10 page">
-          <div class="top">
+        <div class="col-md-9 content">
+          <p id="simple-pages-breadcrumbs">
+            <span><a href="<?php echo url('/');?>">Home</a></span>
+             > <span><a href="<?php echo url('/exhibits');?>">Tentoonstellingen</a></span>
+             > <?php echo metadata('exhibit', 'title'); ?>
+           </p>
+            <h1><?php echo metadata('exhibit', 'title'); ?></h1>
             <?php if (($exhibitCredits = metadata('exhibit', 'credits'))) : ?>
             <div class="exhibit-credits">
                   <h3><?php echo $exhibitCredits; ?></h3>
             </div>
             <?php endif; ?>
-            <h1><?php echo metadata('exhibit', 'title'); ?></h1>
-          </div>
-        </div>
-      </div>
-      <div class="row ">
-        <div class="col-sm-8 page">
-            <!--<div class='top'>
-                <?php if (!$is_home_page) : ?>
-                <p id="simple-pages-breadcrumbs"><span>Tentoonstelling</span></p>
 
-                <?php endif; ?>
-            </div>-->
-            <div class='content'>
-                <?php if (($exhibit->cover_image_file_id)) : ?>
-                <?php
-                  $file = get_record_by_id('File',$exhibit->cover_image_file_id);
-                  $cover_url = $file->getWebPath('fullsize');
-                ?>
-                <?php endif; ?>
+            <?php if (($exhibit->cover_image_file_id)) : ?>
+            <?php
+              $file = get_record_by_id('File',$exhibit->cover_image_file_id);
+              $cover_url = $file->getWebPath('fullsize');
+            ?>
+            <?php endif; ?>
 
-                <img class="cover" src="<?php echo $cover_url ?>">
+            <img class="cover" src="<?php echo $cover_url ?>">
 
 
-                <?php if ($exhibitDescription = metadata('exhibit', 'description', array('no_escape' => true))) : ?>
-                <div class="exhibit-description">
-                    <?php echo $exhibitDescription; ?>
-                </div>
-                <?php endif; ?>
+            <?php if ($exhibitDescription = metadata('exhibit', 'description', array('no_escape' => true))) : ?>
+            <div class="exhibit-description">
+                <?php echo $exhibitDescription; ?>
             </div>
+            <?php endif; ?>
         </div>
 
         <div class="col-md-3 nav">

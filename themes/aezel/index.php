@@ -3,18 +3,20 @@
     <div class="container">
         <div class="row">
             <section class="kijker">
-                <div class="col-sm-7">
+                <div class="col-sm-12 col-md-7">
                     <div class="carousel-wrap">
                         <div data-ride="carousel" class="carousel slide" id="myCarousel">
-
                           <div role="listbox" class="carousel-inner">
                               <?php echo libis_get_featured_exhibits();?>
                           </div>
                         </div>
                     </div>
                 </div>
-                <div id="right" class="col-sm-5">
+                <div id="right" class="col-sm-12 col-md-5">
                     <div class="well"></div>
+                    <p class="link-to-all">
+                      <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+                          Meer tentoonstellingen</a></p>
                 </div>
            </section>
        </div>
@@ -23,18 +25,19 @@
 <section class='about eigen'>
 <div class="container content-wrapper bs-docs-section ">
     <div class="row">
-        <div class="offset-lg-1 col-sm-10">
+        <div class="offset-lg-1 col-lg-10">
             <div class="eigen-verhaal">
               <h3><span>Vertel je eigen verhaal</span></h3>
               <div class="row">
-                <div class="offset-lg-1 col-sm-2 col-xs-12 pencil">
+                <div class="offset-lg-1 col-sm-3 col-md-3 col-lg-2 hidden-xs-down pencil">
                     <img src="<?php echo img("logos/book_logo.png");?>">
                 </div>
-                <div class="col-sm-9 col-xs-12">
+                <div class="col-md-8 col-sm-8 col-lg-9 col-xs-12">
+                    <img src="<?php echo img("logos/book_logo.png");?>" class="hidden-sm-up pull-left img-in-text" />
                     <p class="description">Wil jij een eigen verhaal over onze streek met ons delen?
                     Morbi pharetra tristique dolor nec sagittis. Suspendisse pellentesque lacinia hendrerit. Sed volutpat tristique libero ac mollis. Donec non nisl auctor, tristique lectus nec, dignissim orci.
                     </p>
-                    <p class="lees-meer"><a href="/eigen-verhaal">Meer informatie</a></p>
+                    <p class="lees-meer"><a href="/eigen-verhaal">Ga zelf aan de slag</a></p>
                 </div>
               </div>
             </div>
@@ -106,10 +109,10 @@
 <section class='about'>
 <div class="container  intro">
     <div class="row">
-        <div class="col-xs-12 offset-lg-2 col-lg-4">
+        <div class="col-xs-12 offset-lg-2 col-md-5 col-lg-4">
             <img class="logo" src="<?php echo img("roermond.jpg");?>">
         </div>
-        <div class="col-xs-12 col-lg-4">
+        <div class="col-xs-12 col-md-7 col-lg-4">
               <H3><span>Over ons</span></h3>
               <?php if ($homepageText = get_theme_option('Homepage Text')): ?>
                   <?php echo $homepageText; ?>
