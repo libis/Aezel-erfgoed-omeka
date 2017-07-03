@@ -147,6 +147,24 @@ function libis_get_news($tag = "")
     <?php endforeach;
 }
 
+function libis_get_partners()
+{
+    $items = get_records('Item', array('type'=>'Partner','sort_field' => 'added', 'sort_dir' => 'd'), 12);
+    if (!$items) : ?>
+        <p>Er zijn nog geen partners opgeladen.</p>
+    <?php endif; ?>
+    <?php foreach ($items as $item) :?>
+      <div class="col-sm-3 icon-block">
+          <div class="well">
+              <?php if (metadata($item, 'has files')) : ?>
+                  <?php echo item_image('thumbnail',array('class'=>'logo'),0,$item);?>
+              <?php endif; ?>
+              <h3><?php echo link_to_item(metadata($item, array('Dublin Core', 'Title')), array(), 'show', $item); ?></h3>
+          </div>
+      </div>
+    <?php endforeach;
+}
+
 function libis_get_featured_exhibits()
 {
   $exhibits = get_records('Exhibit', array('sort_field' => 'added', 'sort_dir' => 'd'), 3);

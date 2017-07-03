@@ -15,7 +15,7 @@
                 <div id="right" class="col-sm-12 col-md-5">
                     <div class="well"></div>
                     <p class="link-to-all">
-                      <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+                      <a href="<?php echo url("exhibits");?>"><i class="fa fa-angle-right" aria-hidden="true"></i>
                           Meer tentoonstellingen</a></p>
                 </div>
            </section>
@@ -37,7 +37,7 @@
                     <p class="description">Wil jij een eigen verhaal over onze streek met ons delen?
                     Morbi pharetra tristique dolor nec sagittis. Suspendisse pellentesque lacinia hendrerit. Sed volutpat tristique libero ac mollis. Donec non nisl auctor, tristique lectus nec, dignissim orci.
                     </p>
-                    <p class="lees-meer"><a href="/eigen-verhaal">Ga zelf aan de slag</a></p>
+                    <p class="lees-meer"><a href="<?php echo url("aan-de-slag");?>">Ga zelf aan de slag</a></p>
                 </div>
               </div>
             </div>
@@ -51,54 +51,7 @@
         <h3  class="ontdek"><span>Onze partners</span></h3>
         <div class="row icons">
           <div class="responsive" role="toolbar">
-            <div class="col-sm-3 icon-block">
-                <div class="well">
-                    <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                    <h3><a href="">Genealogische Databank</a></h3>
-                </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
-            <div class="col-sm-3 icon-block">
-              <div class="well">
-                  <img class="logo" src="<?php echo img("roermond.jpg");?>">
-                  <h3><a href="">Genealogische Databank</a></h3>
-              </div>
-            </div>
+            <?php echo libis_get_partners();?>
           </div>
         </div>
         <div class="row">
@@ -120,7 +73,7 @@
             </div>
         </div>
         <div class="row">
-          <p class="link-to-all"><a href="">Lees meer</a></p>
+          <p class="link-to-all"><a href="<?php echo url("meer-info");?>">Lees meer</a></p>
         </div>
     </div>
 </div>
