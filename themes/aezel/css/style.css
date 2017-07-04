@@ -7172,6 +7172,23 @@ section.eigen .eigen-verhaal .img-in-text {
   width: auto;
 }
 
+.single img {
+  width: 100%;
+}
+
+.single .link-to-exhibits {
+  padding-bottom: 1.5rem;
+}
+
+.single .link-to-exhibits a {
+  margin-right: 10px;
+  padding-bottom: 0.3rem;
+  font-weight: bold;
+  border-bottom: 2px solid rgba(232, 57, 58, 0.8);
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+}
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }

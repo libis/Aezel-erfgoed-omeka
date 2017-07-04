@@ -5,7 +5,6 @@
  */
 ?>
 
-
 <?php queue_css_file('results'); ?>
 <?php echo head(array('title' => __('Solr Search'))); ?>
 
@@ -109,13 +108,20 @@
                         $item = get_db()->getTable($doc->model)->find($doc->modelid);
                         if (metadata($item, 'has files')) :?>
                               <div class="col-md-3 col-img">
+
                           <?php
-                          echo link_to_item(
-                              item_image('thumbnail', array('alt' => $doc->title), 0, $item),
-                              array(),
-                              'show',
-                              $item
-                          );
+                          if($partnerlink = metadata($item, array('Item Type Metadata','page'))):?>
+                              <a href="<?php echo url($partnerlink);?>">
+                                <?php echo item_image('thumbnail', array('alt' => $doc->title), 0, $item);?>
+                              </a>
+                          <?php else:
+                              echo link_to_item(
+                                  item_image('thumbnail', array('alt' => $doc->title), 0, $item),
+                                  array(),
+                                  'show',
+                                  $item
+                              );
+                          endif;
                           ?>
                           </div>
 
@@ -126,8 +132,13 @@
                     <div class="col-md-9">
 
                         <!-- Record URL. -->
-                        <?php $url = SolrSearch_Helpers_View::getDocumentUrl($doc); ?>
-
+                        <?php
+                        if($partnerlink):
+                            $url = url($partnerlink);
+                        else:
+                            $url = SolrSearch_Helpers_View::getDocumentUrl($doc);
+                        endif;
+                        ?>
                         <!-- Title. -->
                         <h2><a href="<?php echo $url; ?>" class="result-title">
                         <?php
