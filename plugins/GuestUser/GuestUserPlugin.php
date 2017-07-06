@@ -207,7 +207,7 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
          * should be done before show/hide (following code) to make sure that it is always a part of the menu)
          * */
         $navLinks['Espace'] = array(
-            'label' => __('My Space'),
+            'label' => __('User Space'),
             'uri' => public_url('/guest-user/user/me')
         );
         //libis_end
@@ -246,7 +246,7 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
                 the omeka admin by clicking 'Welcome, User Name' on user menu bar. This fix restricts profile editing
                 via omeka admin. User should edit profile via 'My Profiles' (UserProfiles plugin) option in menu bar.
             */
-            $navLinks[0]['label'] = "My Space";     /* Change the label of the menu. */
+            $navLinks[0]['label'] = "User Space";     /* Change the label of the menu. */
             $navLinks[0]['uri'] = absolute_url('/guest-user/user/me');
             //libis_end
 
