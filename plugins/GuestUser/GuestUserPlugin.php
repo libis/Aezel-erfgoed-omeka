@@ -90,8 +90,16 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $acl = $args['acl'];
         $acl->addRole(new Zend_Acl_Role('guest'), null);
-        //added for aezel
-        $acl->allow(array('guest'), array('SimplePages_Page'));
+
+        //libis_start
+        // Allow 'contributor' role to make its item public/private.
+        $acl->allow('contributor', 'Items', array('makePublic'));
+        //libis_end
+
+        //libis_start
+        // Do not show other's private items and collections, and search on them to 'contributor' role.
+        $acl->deny('contributor', array('Items', 'Collections', 'Search'), array('showNotPublic'));
+        //libis_end
     }
 
     public function hookConfig($args)
@@ -192,6 +200,33 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterAdminNavigationMain($navLinks)
     {
+        //libis_start
+        /*
+         * Add a menu item to let user go to the espace dashboard (not omeka dashboard). The menu item will be added
+         * to the admin navigation menu therefore will only be available to logged in users. Addition of this menu item
+         * should be done before show/hide (following code) to make sure that it is always a part of the menu)
+         * */
+        $navLinks['Espace'] = array(
+            'label' => __('User Space'),
+            'uri' => public_url('/guest-user/user/me')
+        );
+        //libis_end
+
+        //libis_start
+        /*
+         * If this plugin is configured to be hidden for the current user's role then do not add it to
+         * the navigation links ($navLinks)
+         * */
+        $user = current_user();
+        $currentClass = get_class() ;
+        if(isset($user, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            $hide = get_option(strtolower($pluginName.'_'.$user->role.'_hide'));
+            if($hide == 1)
+                return $navLinks;
+        }
+        //libis_end
+
         $navLinks['Guest User'] = array('label' => __("Guest Users"),
                                         'uri' => url("guest-user/user/browse?role=guest"));
         return $navLinks;
@@ -205,6 +240,16 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
             if($user->role == 'guest') {
                 unset($navLinks[1]);
             }
+
+            //libis_start
+            /*  Restrict profile editing via omeka admin user interface. Currently, a user is redirected to user edit part of
+                the omeka admin by clicking 'Welcome, User Name' on user menu bar. This fix restricts profile editing
+                via omeka admin. User should edit profile via 'My Profiles' (UserProfiles plugin) option in menu bar.
+            */
+            $navLinks[0]['label'] = "User Space";     /* Change the label of the menu. */
+            $navLinks[0]['uri'] = absolute_url('/guest-user/user/me');
+            //libis_end
+
             $navLinks[0]['id'] = 'admin-bar-welcome';
             $meLink = array('id'=>'guest-user-me',
                     'uri'=>url('guest-user/user/me'),
@@ -228,6 +273,15 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
                     'label' => $registerLabel,
                     'uri' => url('guest-user/user/register'),
                     )
+            //libis_start
+            /* Add activate account link to the menu bar. */
+            ,
+            'guest-user-activate' => array(
+                'id' => 'guest-user-activate',
+                'label' => 'Activate Account',
+                'uri' => url('guest-user/user/activate'),
+            )
+            //libis_end
                 );
         return $navLinks;
     }
@@ -239,10 +293,43 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         $accountUrl = url('guest-user/user/update-account');
         $html = "<ul>";
         $html .= "<li><a href='$accountUrl'>" . __("Update account info and password") . "</a></li>";
+
+        //libis_start
+        /* Add profile link to the user's setting panel. */
+        $userProfile = new UserProfilesPlugin();
+        $urls = $userProfile->filterGuestUserLinks(null);
+        if(isset($urls) && array_key_exists("UserProfiles", $urls)){
+            $userUrls = $urls["UserProfiles"];
+            if(array_key_exists("uri", $userUrls))
+                $html .= "<li><a href='".$userUrls["uri"]."'>" . __("Profile") . "</a></li>";
+
+        }
+        //libis_end
+
         $html .= "</ul>";
         $widget['content'] = $html;
         $widgets[] = $widget;
+
+        //libis_start
+        /* Create a panel for user contents. */
+        $stories = $this->storyUserWidget();
+        if(isset($stories) && sizeof($stories) > 0)
+            $widgets [] = $stories;
+        //libis_end
+
         return $widgets;
+    }
+
+    private function storyUserWidget(){
+        $html = "";
+        $widgetUserContent = array('label'=> __('My Content'));
+        $html .= "<ul>";
+        $html .= "<li><a href='".url('admin/exhibits', array('owner' => current_user()->id))."'>" . __("Stories") . "</a></li>";
+        $html .= "<li><a href='".url('admin/items/browse', array('owner' => current_user()->id))."'>" . __("Items") . "</a></li>";
+        $html .= "<li><a href='".url('admin/collections/browse', array('owner' => current_user()->id))."'>" . __("Collections") . "</a></li>";
+        $html .= "</ul>";
+        $widgetUserContent['content'] = $html;
+        return $widgetUserContent;
     }
 
     private function _sendMadeActiveEmail($record)
@@ -265,12 +352,12 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
     }
-
+    
     public static function guestUserWidget($widget)
     {
         if(is_array($widget)) {
-        //$html = "<h2 class='guest-user-widget-label'>" . $widget['label'] . "</h2>";
-        $html = $widget['content'];
+        $html = "<h2 class='guest-user-widget-label'>" . $widget['label'] . "</h2>";
+        $html .= $widget['content'];
         return $html;
     } else {
         return $widget;

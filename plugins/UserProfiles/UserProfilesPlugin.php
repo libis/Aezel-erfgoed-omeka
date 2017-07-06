@@ -16,8 +16,7 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         'public_content_top',
         'admin_users_browse_each',
         'after_delete_user',
-        'initialize',
-        'upgrade',
+        'initialize'
         );
 
     protected $_filters = array(
@@ -42,24 +41,6 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         add_translation_source(dirname(__FILE__) . '/languages');
     }
 
-    public function hookUpgrade($args)
-    {
-        $db = get_db();
-        $old = $args['old_version'];
-        $new = $args['new_version'];
-        if (version_compare($new, '1.1.1', '>=')) {
-            $sql = "
-            ALTER TABLE `$db->UserProfilesProfile` CHANGE  `modified` `modified` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00'
-            ";
-            $db->query($sql);
-            
-            $sql = "
-            ALTER TABLE `$db->UserProfilesProfile` CHANGE  `added` `added` TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00'
-            ";
-            $db->query($sql);
-        }
-    }
-
     public function hookInstall()
     {
         $db = get_db();
@@ -68,8 +49,8 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
                 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
                 `type_id` int(10) unsigned NOT NULL ,
                 `owner_id` int(10) unsigned NOT NULL ,
-                `added` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00',
-                `modified` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+                `added` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+                `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
                 `public` tinyint(1) NOT NULL,
                 PRIMARY KEY (`id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
@@ -147,6 +128,9 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         //don't forget to delete the record relations
         $sql = "DELETE FROM `$db->RecordRelationsRelation` WHERE `object_record_type` = 'UserProfilesProfile'" ;
         $db->query($sql);
+
+        /* Remove plugin show/hide options from database. */
+        $this->removePluginHideConfiguration();
     }
 
     public function hookAfterDeleteUser($args)
@@ -160,6 +144,20 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterAdminNavigationMain($tabs)
     {
+        /*
+         * If this plugin is configured to be hidden for the current user's role then do not add it to
+         * the navigation links ($navLinks)
+         * */
+        $user = current_user();
+        $currentClass = get_class() ;
+        if(isset($user, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            $hide = get_option(strtolower($pluginName.'_'.$user->role.'_hide'));
+            if($hide == 1)
+                return $tabs;
+        }
+
+
         $tabs['User Profiles'] = array('label'=>'User Profiles', 'uri'=>url("user-profiles") );
         return $tabs;
     }
@@ -322,5 +320,19 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         //let all logged in people see the types available, but hide non-public ones from searches
         //since public/private is managed by Omeka_Db_Select_PublicPermission, this keeps them out of the navigation
         $acl->allow($roles, 'UserProfiles_Type', array('showNotPublic'));
+    }
+
+    /**
+     * Remove show/hide plugin configurations.
+     */
+    public function removePluginHideConfiguration(){
+        $userRoles = get_user_roles();
+        $currentClass = get_class() ;
+        if(isset($userRoles, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            foreach($userRoles as $role){
+                delete_option(strtolower($pluginName."_".$role."_hide"));
+            }
+        }
     }
 }

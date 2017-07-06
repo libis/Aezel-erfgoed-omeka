@@ -34,7 +34,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
             return;
         }
-        $user->role = 'guest';
+        $user->role = 'contributor'; /* Default role is contributor for europeana space. */
         if($openRegistration || $instantAccess) {
             $user->active = true;
         }
@@ -68,6 +68,13 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
                 }
                 if($openRegistration) {
                     $message = __("Thank you for registering. Please check your email for a confirmation message. Once you have confirmed your request, you will be able to log in.");
+
+                    //libis_start
+                    /* Open registration for contributor users does not require confirmation, therefore a different message needs to be shown. */
+                    if($user->role === 'contributor')
+                        $message = __("Thank you for registering. You can login now. An email has been sent to you with your login information.");
+                    //libis_end
+
                     $this->_helper->flashMessenger($message, 'success');
                     $activation = UsersActivations::factory($user);
                     $activation->save();
@@ -114,14 +121,76 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
             return;
         }
 
-        $user->setPassword($_POST['new_password']);
+        //libis_start
+        /*
+         * Account deactivation and password change cannot be performed together.
+         * Only change to new password if it is not an deactivation request.
+         * */
+        if($form->getElement('account_status')->getValue() != 0)
+            $user->setPassword($_POST['new_password']);
+        //libis_end
+        
+        //libis_start
+        /* Get the value of the active checkbox on update account page. */
+        $user->active = $form->getElement('account_status')->getValue();
+        //libis_end
+
+
         $user->setPostData($_POST);
         try {
             $user->save($_POST);
+
+            //libis_start
+            $this->_helper->flashMessenger(__("Account updated successfully."), 'success');
+            //libis_end
+
+            /* Logout after user account deactivated. */
+            if(!$form->getElement('account_status')->getValue())
+                $this->redirect('users/logout');
+            //libis_end
+
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         }
     }
+
+    //libis_start
+    /* Action to activate an inactive user account. */
+    public function activateAction(){
+        if(current_user()) {
+            $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        if(empty($_POST))
+            return;
+
+        $email = $_POST['email'];
+        if (!Zend_Validate::is($email, 'EmailAddress')) {
+            $this->_helper->flashMessenger('Please provide a valid email address.', 'error');
+            return;
+        }
+
+        /* Check if user exists with this email, if exists update status to active and display message. */
+        $db = get_db();
+        $users = $db->getTable('User')->findBy(array('email' => $email));
+        if (empty($users)) {
+            $this->_helper->flashMessenger('No user account found associated to this email.', 'error');
+            return;
+        }
+
+        $user = new User();
+        $user = $users[0];
+        $user->active = 1;
+        $ret = $user->save();
+        if($ret){
+            $this->_sendActivationEmail($user);
+            $this->_helper->flashMessenger(__("Your account associated with '%s' has been activated. You can login now.", $email), 'success');
+        }
+        else
+            $this->_helper->flashMessenger(__("Error in activation. Contact the admin of this site."), 'error');
+
+    }
+    //libis_end
 
     public function meAction()
     {
@@ -216,14 +285,72 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
                 'captcha' => Omeka_Captcha::getCaptcha()
             ));
         }
+
+        //libis_start
+        /* Add a checkbox for terms and conditions page. */
+        $termscb = $form->addElement('checkbox', 'terms_conditions',
+            array(
+                'label'             => __('I agree to the terms and conditions of the Europeana Space project'),
+                'escape'            => false,
+                'uncheckedValue'    => '',
+                'checkedValue'      => 'I Agree',
+                'description'       => '<a href='.url("termsconditions").' target = _blank>Terms and Conditions</a>',
+                'validators'        => array(
+                    array('notEmpty', true, array(
+                        'messages' => array(
+                            'isEmpty'=>'You must agree to the terms and conditions.'
+                        )
+                    ))
+                ),
+                'required'=>true,
+            )
+        );
+        $termscb->addDecorator('description', array('escape' => FALSE, 'position' => 'append'));
+        //libis_end
+
         if (current_user()) {
             $submitLabel = __('Update');
+
+            //libis_start
+            $user = current_user();
+
+            /* Add a checkbox for activate/deactivate account. */
+            $statuscb = $form->addElement('checkbox', 'account_status',
+                array(
+                    'label'             => __('Active account (If you deactivate your account you will be logged out)'),
+                    'escape'            => false,
+                    'checked'           => $user->active,
+                    'uncheckedValue'    => '0',
+                    'checkedValue'      => '1'
+                )
+            );
+            $statuscb->addDecorator('description', array('escape' => FALSE, 'position' => 'append'));
+            //libis_end
+
         } else {
             $submitLabel = get_option('guest_user_register_text') ? get_option('guest_user_register_text') : __('Register');
         }
         $form->addElement('submit', 'submit', array('label' => $submitLabel));
         return $form;
     }
+
+    //libis_start
+    protected function _sendActivationEmail($user)
+    {
+        $siteTitle = get_option('site_title');
+        $body = __("Your account on %s has been activated.", $siteTitle);
+        $siteUrl = absolute_url('/');
+        $body .= "<p>" . __("You can now log into %s .", "<a href='$siteUrl'>$siteTitle</a>") . "</p>";
+
+        $subject = __("Account activation");
+        $mail = $this->_getMail($user, $body, $subject);
+        try {
+            $mail->send();
+        } catch (Exception $e) {
+            _log($e);
+        }
+    }
+    //libis_end
 
     protected function _sendConfirmedEmail($user)
     {
@@ -235,7 +362,6 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         } else {
             $body .= "<p>" . __("When an administrator approves your account, you will receive another message that you can use to log in with the password you chose.") . "</p>";
         }
-
         $subject = __("Registration for %s", $siteTitle);
         $mail = $this->_getMail($user, $body, $subject);
         try {
@@ -256,6 +382,17 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         if(get_option('guest_user_instant_access') == 1) {
             $body .= "<p>" . __("You have temporary access to %s for twenty minutes. You will need to confirm your request to join after that time.", $siteTitle) . "</p>";
         }
+
+        //libis_start
+        /*
+            No confirmation is needed for an open account (without admin approval) and for contributor role. Therefore, send the following message.
+        */
+        if(get_option('guest_user_open') == 1 && $user->role === 'contributor'){
+            $loginUrl = WEB_ROOT . '/users/login';
+            $body = __("You have registered for an account on %s. Your user id is: %s. Click %s to login.", "<a href='$siteUrl'>$siteTitle</a>", $user->username , "<a href='$loginUrl'>" . __('here') . "</a>", $siteTitle);
+        }
+        //libis_end
+
         $mail = $this->_getMail($user, $body, $subject);
         try {
             $mail->send();

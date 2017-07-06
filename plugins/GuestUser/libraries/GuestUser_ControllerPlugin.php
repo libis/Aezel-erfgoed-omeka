@@ -8,22 +8,6 @@ class GuestUser_ControllerPlugin extends Zend_Controller_Plugin_Abstract
     {
         $this->_preventAdminAccess($request);
         $this->_warnUnconfirmedUsers($request);
-        if(!is_admin_theme()):
-          $this->_preventSiteAccess($request);
-        endif;
-    }
-
-    protected function _preventSiteAccess($request)
-    {
-        $user = current_user();
-        $allowAccess = false;
-        $path = $request->getPathInfo();
-        if (0 === strpos($path, '/vrijwilligers')) {
-          // prevent access to site for anyone not logged in, including guests.
-          if (!$user && !$allowAccess){
-            $this->_getRedirect()->gotoUrl(WEB_ROOT .'/users/login');
-          }
-        }
     }
 
     protected function _preventAdminAccess($request)
@@ -40,7 +24,7 @@ class GuestUser_ControllerPlugin extends Zend_Controller_Plugin_Abstract
      * for a limited time. Warn them here if it's been more than 20 minutes
      * @param unknown_type $request
      */
-
+    
     protected function _warnUnconfirmedUsers($request)
     {
         $user = current_user();
@@ -56,9 +40,9 @@ class GuestUser_ControllerPlugin extends Zend_Controller_Plugin_Abstract
                     if(!$token->confirmed && $user->active && $diff > 1200) {
                         $this->_getRedirect()->gotoUrl(WEB_ROOT . '/guest-user/user/stale-token');
                     }
-                }
+                }            
         }
-
+        
     }
 
     protected function _getRedirect()
