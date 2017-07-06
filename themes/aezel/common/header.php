@@ -50,7 +50,7 @@
             <button class="navbar-toggler pull-xs-right navbar-text hidden-lg-up navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               &#9776;
             </button>
-            <?php echo link_to_home_page("<img src='".img("/logos/book_logo.png")."'>".option('site_title'), array('class'=>'navbar-brand')); ?>
+            <a href="http://vagrant/aezel2" class="navbar-brand"><img src="http://vagrant/aezel2/themes/aezel/images//logos/book_logo.png">LGGI  <span>Erfgoed</span></a>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse pull-xs-left navbar-toggleable-md collapse" id="navbarSupportedContent">

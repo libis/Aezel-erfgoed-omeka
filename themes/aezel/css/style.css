@@ -6358,19 +6358,31 @@ hr {
   font-weight: 600;
   font-size: 3rem;
   text-transform: uppercase;
-  line-height: 60px;
+  line-height: 62px;
   margin: 0 20px 0  0;
   padding: 0;
+  display: table;
 }
 
 .navbar-default .navbar-brand img {
   height: 50px;
-  padding: 5px 0 0px 0px;
+  padding: 6px 0 0px 0px;
   float: left;
-  line-height: 60px;
+  line-height: 64px;
   vertical-align: bottom;
   margin: 4px 10px 0 0px;
   vertical-align: text-bottom;
+}
+
+.navbar-default .navbar-brand span {
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: 500;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-transform: none;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 @media (max-width: 991px) {
@@ -6381,7 +6393,7 @@ hr {
 
 .navbar-default .navbar-nav {
   width: auto;
-  line-height: 60px;
+  line-height: 64px;
 }
 
 .navbar-default .navbar-nav li {
@@ -6438,7 +6450,7 @@ hr {
 
 .navbar-default .form-inline {
   border: none;
-  padding: 0.9rem 0;
+  padding: 0.8rem 0;
   background: transparent;
 }
 
