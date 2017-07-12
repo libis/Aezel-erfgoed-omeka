@@ -1,8 +1,7 @@
-    <?php $style = get_color();?>
-    <footer class="footer">
+        <footer class="footer">
         <div class="container">
             <div class="row">
-                 <div class="footer-logo"><img class="logo" src="<?php echo img("logos/".$style["logo"].".png");?>"></div>
+                 <div class="footer-logo"><img class="logo" src="<?php echo img("logos/book_logo.png");?>"></div>
             </div>
             <div class="row">
                  <div class="offset-md-3 col-md-6">
