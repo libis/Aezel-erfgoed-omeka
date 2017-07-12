@@ -50,17 +50,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
         $db = $this->_db;
-        
-        // we think the 3rd party Comment plugin uses the same name,
-        // and it doesn't delete its table on uninstall, causing some
-        // collision problems. So, clobber it if it's here
-        
-        $sql = "
-            DROP TABLE IF EXISTS `$db->Comment`;
-        ";
-        
-        $db->query($sql);
-        
         $sql = "
             CREATE TABLE IF NOT EXISTS `$db->Comment` (
               `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -83,7 +72,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
-        
         $db->query($sql);
         set_option('commenting_comment_roles', serialize(array()));
         set_option('commenting_moderate_roles', serialize(array()));
@@ -136,6 +124,9 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $db = get_db();
         $sql = "DROP TABLE IF EXISTS `$db->Comment`";
         $db->query($sql);
+
+        /* Remove plugin show/hide options from database. */
+        $this->removePluginHideConfiguration();
     }
 
     public function hookPublicHead()
@@ -163,13 +154,20 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public static function showComments($args = array())
     {
-        $view = get_view();
         echo "<div id='comments-container'>";
         echo "<div id='comment-main-container'>";
         if( (get_option('commenting_allow_public') == 1)
                 || (get_option('commenting_allow_public_view') == 1)
                 || is_allowed('Commenting_Comment', 'show') ) {
+            if(isset($args['view'])) {
+                $view = $args['view'];
+            } else {
+                $view = get_view();
+            }
+
+            $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
             $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
+
             $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
             echo $view->partial('comments.php', array('comments'=>$comments, 'threaded'=>$options['threaded']));
         }
@@ -255,6 +253,20 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterAdminNavigationMain($tabs)
     {
+        /*
+         * If this plugin is configured to be hidden for the current user's role then do not add it to
+         * the navigation links ($navLinks)
+         * */
+        $user = current_user();
+        $currentClass = get_class() ;
+        if(isset($user, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            $hide = get_option(strtolower($pluginName.'_'.$user->role.'_hide'));
+            if($hide == 1)
+                return $tabs;
+        }
+
+
         if(is_allowed('Commenting_Comment', 'update-approved') ) {
             $tabs[] = array('uri'=> url('commenting/comment/browse'), 'label'=>__('Comments') );
         }
@@ -318,5 +330,19 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                 'record_id' => $record->id
                 );
         return get_db()->getTable('Comment')->count($params);
+    }
+
+    /**
+     * Remove show/hide plugin configurations.
+     */
+    public function removePluginHideConfiguration(){
+        $userRoles = get_user_roles();
+        $currentClass = get_class() ;
+        if(isset($userRoles, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            foreach($userRoles as $role){
+                delete_option(strtolower($pluginName."_".$role."_hide"));
+            }
+        }
     }
 }
