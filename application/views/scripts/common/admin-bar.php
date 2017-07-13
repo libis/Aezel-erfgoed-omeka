@@ -7,10 +7,13 @@
             'label' => __('Welcome, %s', $user->name),
             'uri' => admin_url('/users/edit/'.$user->id)
         ),
+// user can go to admin view from user space		
+/*
         array(
             'label' => __('Omeka Admin'),
             'uri' => admin_url('/')
         ),
+*/		
         array(
             'label' => __('Log Out'),
             'uri' => url('/users/logout')
