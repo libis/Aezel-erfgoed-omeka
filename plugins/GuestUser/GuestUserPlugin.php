@@ -272,17 +272,8 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
                     'id' => 'guest-user-register',
                     'label' => $registerLabel,
                     'uri' => url('guest-user/user/register'),
-                    )
-            //libis_start
-            /* Add activate account link to the menu bar. */
-            ,
-            'guest-user-activate' => array(
-                'id' => 'guest-user-activate',
-                'label' => 'Activate Account',
-                'uri' => url('guest-user/user/activate'),
-            )
-            //libis_end
-                );
+                )
+            );
         return $navLinks;
     }
 
