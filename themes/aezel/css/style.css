@@ -6451,6 +6451,7 @@ hr {
 .navbar-default .form-inline {
   border: none;
   padding: 0.8rem 0;
+  margin-bottom: 0;
   background: transparent;
 }
 
@@ -6856,7 +6857,7 @@ section.eigen .eigen-verhaal .img-in-text {
 }
 
 .container .content {
-  padding: 3em;
+  padding: 3rem 1rem;
   background: #fff;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 1.1rem;
@@ -7238,6 +7239,58 @@ section.eigen .eigen-verhaal .img-in-text {
 
 .register #submit:hover, .login #submit:hover, .update-account #submit:hover {
   background: #AB2222;
+}
+
+.guest-user h2.guest-user-widget-label {
+  background: #e8393a;
+  color: #fff;
+  font-style: italic;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.2em;
+  margin-bottom: .75em;
+}
+
+.europeana #libco-search-box {
+  padding-bottom: 2rem;
+}
+
+.europeana #libco-search-box .input-group {
+  width: 100%;
+  max-width: 500px;
+}
+
+.europeana #libco-search-box .input-group input {
+  border: 1px solid rgba(232, 57, 58, 0.8);
+  padding: 6px;
+  height: 2.2rem;
+  border-radius: 2px 0 0 2px;
+  font-family: sans-serif;
+}
+
+.europeana #libco-search-box .input-group button {
+  background: #e8393a;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  color: white;
+  border: none;
+  padding: 0 9px;
+  height: 2.2rem;
+  font-size: 0.9rem;
+  border-radius: 0 2px 2px 0;
+}
+
+.europeana .pagination li {
+  list-style: none;
+  display: inline;
+}
+
+.europeana .pagination input {
+  width: 70px;
+  border: none;
+  background: #f6f6f6;
+  padding-left: 5px;
+  margin-right: 5px;
 }
 
 footer {

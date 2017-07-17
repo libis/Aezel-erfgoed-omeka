@@ -12,9 +12,9 @@ echo head(array(
 ?>
 <div class="container">
     <!-- Content -->
-    <div class="content-wrapper bs-docs-section ">
+    <div class="content-wrapper bs-docs-section  content">
         <div class="row">
-            <div class="col-md-9 content">
+            <div class="col-md-9">
                 <?php if (!$is_home_page): ?>
                 <p id="simple-pages-breadcrumbs"><?php echo simple_pages_display_breadcrumbs(); ?></p>
                 <h1><?php echo metadata('simple_pages_page', 'title'); ?></h1>

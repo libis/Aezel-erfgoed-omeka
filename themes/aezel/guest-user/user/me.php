@@ -1,13 +1,13 @@
 <?php
 $user = current_user();
 $pageTitle =  get_option('guest_user_dashboard_label');
-echo head(array('title' => $pageTitle));
+echo head(array('bodyclass' => 'guest-user','title' => $pageTitle));
 ?>
 <div class="container">
     <!-- Content -->
-    <div class="content-wrapper bs-docs-section ">
+    <div class="content-wrapper bs-docs-section content">
         <div class="row">
-            <div class="col-xs-12 offset-md-3 col-md-6 content">
+            <div class="col-xs-12">
                 <h1>Mijn account</h1>
 
                 <?php echo flash(); ?>

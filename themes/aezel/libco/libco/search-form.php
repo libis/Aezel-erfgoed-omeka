@@ -12,51 +12,56 @@ $formAttributes = array(
 
 <div><?php echo flash(); ?></div>
 
-<div id="libco-search-box">
-    <div class="field">
-        <?php echo $this->formText('q', $query, array('title' => __('Search keywords'), 'size' => 40, 'placeholder' => 'Search...')); ?>
-        <?php echo $this->formButton('', __('Search'), array('type' => 'submit')); ?>
-    </div> 
+<div id="libco-search-box" class="row">
+    <div class='col-xs-12'>
+        <div class="input-group">
+            <?php echo $this->formText('q', $query, array('title' => __('Search keywords'),'class'=>'form-control','placeholder' => 'Zoek...')); ?>
 
-    <?php
-    $libcoService = new LibcoService();
-    $searchSources = $libcoService->getSearchSources();
-    ?>
-    <div class="field">
-        <label><?php echo __("Select Search Source"); ?></label>
-        <div class="inputs">
-            <ul>
-            <?php
-            if(!empty($searchSources) && is_array($searchSources)){
-                foreach($searchSources as $source){
-                    $sourceName = $source->name;
 
-                    /* Api returns error 500 if Youtube is a part of the search sources, therefore skip it.*/
-                    if(strtolower($sourceName) === "youtube")
-                        continue;
-
-                    echo "<li>";
-                    echo $view->formCheckbox('searchsource_'.$sourceName, null, array('class' => 'source', 'checked'=>'checked'));
-                    echo $sourceName;
-                    echo "</li>";
-                }
-                echo "<br>";
-                echo "<li>";
-                echo "<input type='checkbox' class='cbsourceselecctall' id='sourceselecctall' checked='checked'>";
-                echo __('All Sources');
-                echo "</li>";
-            }
-            else{
-                echo 'Error in retrieving search sources from Europeana.';
-            }
-            ?>
-             </ul>
+           <span class="input-group-btn">
+             <?php echo $this->formButton('', __('Search'), array('type' => 'submit')); ?>
+            
+           </span>
         </div>
-    </div>    
-
-        <p><a target="_blank" href="<?php echo url('europeanasearchguide'); ?>"><?php echo __("Need help?"); ?></a></p>
-    </form>
+    </div>
 </div>
+<div class="row">
+    <div class='col-md-3 col-xs-12'>
+        <?php
+        $libcoService = new LibcoService();
+        $searchSources = $libcoService->getSearchSources();
+        ?>
+
+    <p><?php echo __("Select Search Source"); ?></p>
+    <?php
+        if(!empty($searchSources) && is_array($searchSources)){
+            foreach($searchSources as $source){
+                $sourceName = $source->name;
+
+                /* Api returns error 500 if Youtube is a part of the search sources, therefore skip it.*/
+                if(strtolower($sourceName) === "youtube")
+                    continue;
+                echo "";
+                echo "<div class='form-check'><label class='form-check-label'>";
+                echo $view->formCheckbox('searchsource_'.$sourceName, null, array('class' => 'source', 'checked'=>'checked'));
+                echo $sourceName;
+                echo "</label></div>";
+            }
+            echo "<br>";
+            echo "<div class='form-check'><label class='form-check-label'>";
+            echo "<input type='checkbox' class='cbsourceselecctall' id='sourceselecctall' checked='checked'>";
+            echo __('All Sources');
+            echo "</label></div>";
+        }
+        else{
+            echo 'Error in retrieving search sources from Europeana.';
+        }
+    ?>
+
+    <p><a target="_blank" href="<?php echo url('europeanasearchguide'); ?>"><?php echo __("Need help?"); ?></a></p>
+
+  </form>
+  </div>
 
 <script>
     $(document).ready(function() {

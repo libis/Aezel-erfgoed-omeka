@@ -13,48 +13,51 @@
     $pageTitle = __('Search Europeana ') . __('(%s total)', $totalResults);
     echo head(array('title' => $pageTitle));
 ?>
-<div class="container">
+<div class="container europeana">
     <!-- Content -->
-    <div class="content-wrapper bs-docs-section ">
-        <div class="row">
-            <div class="col-md-9 content">
-                <h1><?php echo $pageTitle; ?></h1>
+    <div class="content-wrapper bs-docs-section content">
+      <div class="row">
+        <div class="col-xs-12">
+            <h1><?php echo $pageTitle; ?></h1>
+        </div>
+      </div>
 
-                <?php echo $this->partial('libco/search-form.php', array('query' => $query)); ?>
+      <?php echo $this->partial('libco/search-form.php', array('query' => $query)); ?>
 
-                <?php
-                    if(isset($_POST['eurecords'])){
-                        $currentUser = current_user();
-                        if(!isset($currentUser)){
-                            echo 'To import items from Europeana into Omeka you need to login.';
-                            return;
-                        }
-                        $userId = $currentUser->id;
-
-                        $importer = new ImportRecord();
-                        $importer->userId = $userId;
-
-                        // import to a new collection
-                        if(isset($_POST['chbcollection'], $_POST['txtncollectionname']))
-                            $importer->collectionName =  $_POST['txtncollectionname'];
-
-                        // import to an existing collection
-                        if(isset($_POST['chbexistingcollection'], $_POST['existingcollections'])){
-                            $collArray = explode(',', $_POST['existingcollections']);
-                            $importer->addToExistingCollectionId = $collArray[0];
-                            $importer->collectionName = $collArray[1];
-                            $importer->addToExistingCollection = true;
-                        }
-
-                        $response = $importer->importRecords($_POST['eurecords']);
-                        if(!empty($importer->messages) && is_array($importer->messages)){
-                                foreach($importer->messages as $message){
-                                echo $message."<br>";
-                            }
-                            unset($importer->messages);
-                        }
+      <div class="col-md-8 col-xl-9 col-xs-12">
+            <?php
+                if(isset($_POST['eurecords'])){
+                    $currentUser = current_user();
+                    if(!isset($currentUser)){
+                        echo 'To import items from Europeana into Omeka you need to login.';
+                        return;
                     }
-                ?>
+                    $userId = $currentUser->id;
+
+                    $importer = new ImportRecord();
+                    $importer->userId = $userId;
+
+                    // import to a new collection
+                    if(isset($_POST['chbcollection'], $_POST['txtncollectionname']))
+                        $importer->collectionName =  $_POST['txtncollectionname'];
+
+                    // import to an existing collection
+                    if(isset($_POST['chbexistingcollection'], $_POST['existingcollections'])){
+                        $collArray = explode(',', $_POST['existingcollections']);
+                        $importer->addToExistingCollectionId = $collArray[0];
+                        $importer->collectionName = $collArray[1];
+                        $importer->addToExistingCollection = true;
+                    }
+
+                    $response = $importer->importRecords($_POST['eurecords']);
+                    if(!empty($importer->messages) && is_array($importer->messages)){
+                            foreach($importer->messages as $message){
+                            echo $message."<br>";
+                        }
+                        unset($importer->messages);
+                    }
+                }
+            ?>
 
 
                 <?php if (!empty($error)): ?>
