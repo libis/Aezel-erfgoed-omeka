@@ -75,123 +75,129 @@
                         }
 
                     ?>
-                    <table id="search-results">
+                    <div id="search-results">
                         <form method="post" class="ajax" id="main">
-                            <thead>
-                            <tr>
-                                <td colspan="2">
-                                    <input type="submit" name="btnsubmit" value="Import Items">
-                                </td>
-                                <td>
-                                    <table>
-                                        <tr style="padding: 0px">
-                                            <td style="align-content:center">
-                                                <label></label><input type="checkbox" name="chbcollection"> <?php echo __("Create A New Collection"); ?> </label>
-                                            </td>
-                                            <td> <?php echo __("New Collection Name"); ?> </td>
-                                            <td>
-                                                <input type="text" name="txtncollectionname" disabled>
-                                            </td>
-                                        </tr>
-                                        <?php if(!empty($usercollections)): ?>
-                                        <tr>
-                                            <td style="align-content:center">
-                                                <label></label><input type="checkbox" name="chbexistingcollection"> <?php echo __("Add to Existing Collection"); ?> </label>
-                                            </td>
-                                            <td> <?php echo $this->formSelect('existingcollections', 'Existing Collections', array('class' => 'existing-element-drop-down', 'disabled' => 1),$usercollections, array()); ?> </td>
-                                        </tr>
-                                        <?php endif; ?>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
 
-                            </tr>
-                            <tr>
-                                <th>
-                                    <?php echo __('Selection');?>
-                                    <?php echo '<br>'; echo "<input type='checkbox' class='cbselecctall' id='selecctall'>"; ?>
-                                </th>
-                                <th><?php echo __('');?></th>
-                                <th><?php echo __('Title');?></th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                               <label><?php echo __("New Collection Name"); ?></label>
+                            </div>
+                            <div class="col-xs-12 col-md-8">
+                               <div class="input-group">
+                                  <span class="input-group-addon">
+                                    <input type="checkbox" name="chbcollection" aria-label="Checkbox for following text input">
+                                  </span>
+                                  <input type="text" class="form-control" name="txtncollectionname" aria-label="<?php echo __("Create A New Collection"); ?>" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                               <label><?php echo __("Add to Existing Collection"); ?></label>
+                            </div>
+                            <div class="col-xs-12 col-md-8">
+                              <div class="input-group">
+                                <span class="input-group-addon">
+                                   <input type="checkbox" name="chbexistingcollection">
+                                </span>
+                                <?php echo $this->formSelect('existingcollections', 'Existing Collections', array('class' => 'existing-element-drop-down', 'disabled' => 1),$usercollections, array()); ?>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                              <input type="submit" name="btnsubmit" value="Import Items">
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12 col-md-12">
+                            <table class="table table-responsive">
+                              <thead class="thead-default">
+                                  <tr>
+                                      <th  class="first">
+                                          <?php echo "<input type='checkbox' class='cbselecctall' id='selecctall'>"; ?>
+                                      </th>
+                                      <th><?php echo __('');?></th>
+                                      <th><?php echo __('Title');?></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
 
-                            <?php
-                            $importer = new ImportRecord();
-                            foreach ($records as $source => $items):
-                            ?>
-                                <tr><td style="column-span: 3"> <?php echo $source."(".sizeof($items).")"; ?> </td></tr>
                                 <?php
-                                foreach($items as $data){
-
-                                    if(!isset($data['descriptiveData']['label']['default']))
-                                        continue;
-
-                                    $title = current($data['descriptiveData']['label']['default']);
-                                    if(empty($title))
-                                        continue;
-
-                                    $provenance = end($data['provenance']);
-                                    if(array_key_exists('uri', $provenance))
-                                        $url = $provenance['uri'];
-
-                                    if(!empty($data['media'][0]['Thumbnail']['url']))
-                                        $thumbnail = $data['media'][0]['Thumbnail']['url'];
-
-                                    $data['search_source'] = $source;
-                                    ?>
+                                $importer = new ImportRecord();
+                                foreach ($records as $source => $items):
+                                ?>
+                                    <tr><td style="column-span: 3"> <?php echo $source."(".sizeof($items).")"; ?> </td></tr>
                                     <?php
-                                    if (!empty($thumbnail) && $thumbnail != "null"):
+                                    foreach($items as $data){
+
+                                        if(!isset($data['descriptiveData']['label']['default']))
+                                            continue;
+
+                                        $title = current($data['descriptiveData']['label']['default']);
+                                        if(empty($title))
+                                            continue;
+
+                                        $provenance = end($data['provenance']);
+                                        if(array_key_exists('uri', $provenance))
+                                            $url = $provenance['uri'];
+
+                                        if(!empty($data['media'][0]['Thumbnail']['url']))
+                                            $thumbnail = $data['media'][0]['Thumbnail']['url'];
+
+                                        $data['search_source'] = $source;
                                         ?>
-                                    <tr>
-                                        <td><?php
-                                            $record_str = base64_encode(serialize($data));
-                                            echo "<input type='checkbox' class='cbrecord' id='checkboxselect'  value=' . $record_str .' name='eurecords[]'>";
+                                        <?php
+                                        if (!empty($thumbnail) && $thumbnail != "null"):
                                             ?>
-                                        </td>
-                                        <td>
-                                            <div id="imag-div">
+                                        <tr>
+                                            <td class="first"><?php
+                                                $record_str = base64_encode(serialize($data));
+                                                echo "<input type='checkbox' class='cbrecord' id='checkboxselect'  value=' . $record_str .' name='eurecords[]'>";
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <div id="imag-div">
+                                                    <?php
+                                                    if (!empty($thumbnail) && $thumbnail != "null"):
+                                                        ?>
+                                                        <img src="<?php echo $thumbnail; ?>" height="90" width="90" alt="" onerror="this.style.display='none';">
+                                                    <?php endif ?>
+                                                </div>
+                                            </td>
+
+                                            <td style="vertical-align: middle;">
                                                 <?php
-                                                if (!empty($thumbnail) && $thumbnail != "null"):
-                                                    ?>
-                                                    <img src="<?php echo $thumbnail; ?>" height="90" width="90" alt="" onerror="this.style.display='none';">
-                                                <?php endif ?>
-                                            </div>
-                                        </td>
-
-                                        <td style="vertical-align: middle;">
-                                            <?php
-                                                //link to source record will be provided if given in the search result
-                                                if(!empty($url))
-                                                    echo "<a target = '_blank' href='$url'>$title</a><br>";
-                                                else
-                                                    echo "$title<br>";
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    <?php endif ?>
-                                <?php
-                                }
-                                echo "<br>";
-                            endforeach;
-                            ?>
-                            <tr>
-                                <td colspan="3">
-                                    <input type="submit" name="btnsubmit" value="Import Items">
-                                </td>
-                            </tr>
-                            </tbody>
-                        </form>
-                    </table>
-                <?php endif; ?>
+                                                    //link to source record will be provided if given in the search result
+                                                    if(!empty($url))
+                                                        echo "<a target = '_blank' href='$url'>$title</a><br>";
+                                                    else
+                                                        echo "$title<br>";
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <?php endif ?>
+                                    <?php
+                                    }
+                                    echo "<br>";
+                                endforeach;
+                                ?>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                              <input type="submit" name="btnsubmit" value="Import Items">
+                            </div>
+                        </div>
+                      </form>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-3"></div>
             </div>
-        </div>
-    </div>
-
 <script>
     $(document).ready(function() {
         $('#selecctall').click(function(event) {  //on click

@@ -7280,6 +7280,16 @@ section.eigen .eigen-verhaal .img-in-text {
   border-radius: 0 2px 2px 0;
 }
 
+.europeana .existing-element-drop-down {
+  padding: .2rem .75rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.europeana .table td.first, .europeana .table th.first {
+  vertical-align: middle;
+  text-align: center;
+}
+
 .europeana .pagination li {
   list-style: none;
   display: inline;
