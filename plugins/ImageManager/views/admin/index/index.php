@@ -5,8 +5,6 @@ echo head($head);
 $elfinder_base_uri = WEB_PLUGIN."/ImageManager/view/javascript/elfinder/";
 ?>
 
-<? //echo $this->enableElFinder();?>
-
 <script type="text/javascript">
     jQuery(function(){
         var elf = jQuery('#elfinder').elfinder({

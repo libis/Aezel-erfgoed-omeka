@@ -35,10 +35,7 @@ enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-for
     
     <h1><?php echo $head['title']; ?></h1>
 
-    <?php if(! ($user = current_user() )
-              && !(get_option('contribution_open') )
-            ):
-    ?>
+    <?php if(!get_option('contribution_simple') && !$user = current_user()) :?>
         <?php $session = new Zend_Session_Namespace;
               $session->redirect = absolute_url();
         ?>
@@ -64,13 +61,19 @@ enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-for
                 <?php endif; ?>
                 <div class="inputs">
                     <?php $public = isset($_POST['contribution-public']) ? $_POST['contribution-public'] : 0; ?>
-                    <?php echo $this->formCheckbox('contribution-public', $public, null, array('1', '0')); ?>
-                    <?php echo $this->formLabel('contribution-public', __('Publish my contribution on the web.')); ?>
+                    <!--libis_start-->
+                    <!--by default contribution is public -->
+                    <?php /*echo $this->formCheckbox('contribution-public', $public, null, array('1', '0')); */?>
+                    <?php /*echo $this->formLabel('contribution-public', __('Publish my contribution on the web.')); */?>
+                    <!--libis_end-->
                 </div>
                 <div class="inputs">
                     <?php $anonymous = isset($_POST['contribution-anonymous']) ? $_POST['contribution-anonymous'] : 0; ?>
-                    <?php echo $this->formCheckbox('contribution-anonymous', $anonymous, null, array(1, 0)); ?>
-                    <?php echo $this->formLabel('contribution-anonymous', __("Keep identity private.")); ?>
+                    <!--libis_start-->
+                    <!--disable anonymous contribution-->
+                    <?php /*echo $this->formCheckbox('contribution-anonymous', $anonymous, null, array(1, 0)); */?>
+                    <?php /*echo $this->formLabel('contribution-anonymous', __("Contribute anonymously.")); */?>
+                    <!--libis_end-->
                 </div>
                 <p><?php echo __("In order to contribute, you must read and agree to the %s",  "<a href='" . contribution_contribute_url('terms') . "' target='_blank'>" . __('Terms and Conditions') . ".</a>"); ?></p>
                 <div class="inputs">

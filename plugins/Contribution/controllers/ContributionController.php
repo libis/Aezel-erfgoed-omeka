@@ -36,7 +36,11 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
                     $contribItem->makeNotPublic();
                 }
                 $contribItem->public = $value;
-                $contribItem->anonymous = $_POST['contribution_anonymous'][$id];
+                //libis_start
+                // disable anonymous contribution
+                //$contribItem->anonymous = $_POST['contribution_anonymous'][$id];
+                $contribItem->anonymous = 0;
+                //libis_end
 
                 if($contribItem->save()) {
                     $this->_helper->flashMessenger( __('Your contributions have been updated.'), 'success');
@@ -189,21 +193,12 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
             //for the "Simple" configuration, look for the user if exists by email. Log them in.
             //If not, create the user and log them in.
             $user = current_user();
-            $open = get_option('contribution_open');
-            if ( get_option('contribution_strict_anonymous') ) {
-                $strictAnonymous = empty($post['contribution_email']);
-            } else {
-                $strictAnonymous = false;
-            }
-            
+            $simple = get_option('contribution_simple');
 
-            if(!$user && $open && !$strictAnonymous) {
-                $user = $this->_helper->db->getTable('User')->findByEmail($post['contribution_email']);
+            if(!$user && $simple) {
+                $user = $this->_helper->db->getTable('User')->findByEmail($post['contribution_simple_email']);
             }
 
-            if (!$user && $strictAnonymous) {
-                $user = $this->_createNewAnonymousUser();
-            }
             // if still not a user, need to create one based on the email address
             if(!$user) {
                 $user = $this->_createNewGuestUser($post);
@@ -235,9 +230,16 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
             	$this->_helper->flashMessenger(__('You must select a type for your contribution.'), 'error');
                 return false;
             }
-            $itemMetadata = array('public'       => false,
+            //libis_start
+            // By default contribution is public
+/*            $itemMetadata = array('public'       => false,
                                   'featured'     => false,
-                                  'item_type_id' => $itemTypeId);
+                                  'item_type_id' => $itemTypeId);*/
+
+            $itemMetadata = array('public'       => true,
+                'featured'     => false,
+                'item_type_id' => $itemTypeId);
+            //libis_end
 
             $collectionId = get_option('contribution_collection_id');
             if (!empty($collectionId) && is_numeric($collectionId)) {
@@ -341,8 +343,17 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
     {
         $linkage = new ContributionContributedItem;
         $linkage->item_id = $item->id;
-        $linkage->public = $post['contribution-public'];
-        $linkage->anonymous = $post['contribution-anonymous'];
+        //libis_start
+        // by default contribution is public
+        //$linkage->public = $post['contribution-public'];
+        $linkage->public = 1;
+        //libis_end
+
+        //libis_start
+        // disable anonymous contribution
+        //$linkage->anonymous = $post['contribution-anonymous'];
+        $linkage->anonymous = 0;
+        //libis_end
         $linkage->save();
     }
 
@@ -470,13 +481,10 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
         }
     }
 
-    
-    
-    
     protected function _createNewGuestUser($post)
     {
         $user = new User();
-        $email = $post['contribution_email'];
+        $email = $post['contribution_simple_email'];
         $split = explode('@', $email);
         $name = $split[0];
         if(version_compare(OMEKA_VERSION, '2.2-dev', '<')) {
@@ -488,7 +496,10 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
         }
         $user->email = $email;
         $user->name = $name;
-        $user->role = 'guest';
+	//libis_start
+        //$user->role = 'guest';
+        $user->role = 'contributor';
+        //libis_end
         $user->active = 1;
         try {
             $user->save();
@@ -498,33 +509,6 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
         } catch(Exception $e) {
             _log($e);
         }
-        return $user;
-    }
-    
-    protected function _createNewAnonymousUser()
-    {
-        $user = new User();
-        $userTable = $this->_helper->db->getTable('User');
-        $anonymousCount = $userTable->count(array('role' => 'contribution_anonymous'));
-        $domain = $_SERVER['HTTP_HOST'];
-        if ($domain == 'localhost') {
-            $domain = 'localhost.info';
-        }
-        $email = "anonymous" . $anonymousCount . "@" . $domain;
-        $split = explode('@', $email);
-        $name = $split[0];
-        if(version_compare(OMEKA_VERSION, '2.2-dev', '<')) {
-            $username = str_replace('@', 'AT', $email);
-            $username = str_replace('.', 'DOT', $username);
-            $user->username = $username;
-        } else {
-            $user->username = $email;
-        }
-        $user->email = $email;
-        $user->name = $name;
-        $user->role = 'contribution_anonymous';
-        $user->active = 0;
-        $user->save();
         return $user;
     }
 }

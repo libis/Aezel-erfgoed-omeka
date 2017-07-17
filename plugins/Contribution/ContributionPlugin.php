@@ -38,6 +38,8 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         'items_browse_sql',
         'before_save_item',
         'after_delete_item',
+        'config_form',
+        'config'
     );
 
     /**
@@ -49,8 +51,8 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         'simple_vocab_routes',
         'item_citation',
         'item_search_filters',
-        'guest_user_links',
-        'guest_user_widgets',
+/*        'guest_user_links',
+        'guest_user_widgets',*/
         'api_resources',
         'api_import_omeka_adapters'
     );
@@ -66,9 +68,8 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         'contribution_collection_id',
         'contribution_default_type',
         'contribution_user_profile_type',
-        'contribution_open',
+        'contribution_simple',
         'contribution_email',
-        'contribution_strict_anonymous'
     );
 
     public function setUp()
@@ -163,6 +164,9 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
             `$db->ContributionContributorField`,
             `$db->ContributionContributorValue`;";
         $this->_db->query($sql);
+
+        /* Remove options from database. */
+        $this->removePluginHideConfiguration();
     }
 
     public function hookUpgrade($args)
@@ -254,11 +258,6 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
                 $this->_db->query($sql);
             }
         }
-        
-        if (version_compare($oldVersion, 3.1, '<')) {
-            set_option('contribution_open', get_option('contribution_simple'));
-            delete_option('contribution_simple');
-        }
     }
 
     public function hookUninstallMessage()
@@ -276,12 +275,9 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookDefineAcl($args)
     {
         $acl = $args['acl'];
-    
-        $acl->addRole(new Zend_Acl_Role('contribution-anonymous'), null);
-        
         $acl->addResource('Contribution_Contribution');
         $acl->allow(array('super', 'admin', 'researcher', 'contributor'), 'Contribution_Contribution');
-        if (get_option('contribution_open')) {
+        if (get_option('contribution_simple')) {
             $acl->allow(null, 'Contribution_Contribution', array('show', 'contribute', 'thankyou', 'my-contributions', 'type-form'));
         } else {
             $acl->allow('guest', 'Contribution_Contribution', array('show', 'contribute', 'thankyou', 'my-contributions', 'type-form'));
@@ -418,6 +414,19 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterAdminNavigationMain($nav)
     {
+        /*
+         * If this plugin is configured to be hidden for the current user's role then do not add it to
+         * the navigation links ($navLinks)
+         * */
+        $user = current_user();
+        $currentClass = get_class() ;
+        if(isset($user, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            $hide = get_option(strtolower($pluginName.'_'.$user->role.'_hide'));
+            if($hide == 1)
+                return $nav;
+        }
+
         $contributionCount = get_db()->getTable('ContributionContributedItems')->count();
         if ($contributionCount > 0) {
             $uri = url('contribution/items?sort_field=added&sort_dir=d');
@@ -556,6 +565,45 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         }
     }
 
+    //libis_start
+    /* Define hooks for configuration form to allow show/hid configuration. */
+
+    /**
+     * Display the plugin config form.
+     */
+    public function hookConfigForm()
+    {
+        require dirname(__FILE__) . '/config_form.php';
+    }
+
+    /**
+     * Set the options from the config form input.
+     */
+    public function hookConfig($args)
+    {
+        $post = $args['post'];
+        foreach($post as $option=>$value) {
+            set_option($option, $value);
+        }
+    }
+
+    /**
+     * Remove show/hide plugin configurations.
+     */
+    public function removePluginHideConfiguration(){
+        $userRoles = get_user_roles();
+        $currentClass = get_class() ;
+        if(isset($userRoles, $currentClass)){
+            $pluginName = str_replace('plugin', '', strtolower($currentClass));
+            foreach($userRoles as $role){
+                delete_option(strtolower($pluginName."_".$role."_hide"));
+            }
+        }
+    }
+
+    //libis_end
+
+
     /**
      * Create reasonable default entries for contribution types.
      */
@@ -670,16 +718,16 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         return $cite;
     }
 
-    public function filterGuestUserLinks($nav)
+/*    public function filterGuestUserLinks($nav)
     {
         $nav['Contribution'] = array(
             'label' => 'My Contributions',
              'uri' => contribution_contribute_url('my-contributions'),
         );
         return $nav;
-    }
+    }*/
 
-    public function filterGuestUserWidgets($widgets)
+/*    public function filterGuestUserWidgets($widgets)
     {
         $user = current_user();
         $widget = array('label' => __('My Contributions'));
@@ -701,7 +749,7 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         $widget['content'] = $html;
         $widgets[] = $widget;
         return $widgets;
-    }
+    }*/
 
     private function _adminBaseInfo($args)
     {
@@ -739,7 +787,10 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
             $username = str_replace('.', '', $username);
             $user->username = $username;
             $user->active = true;
-            $user->role = 'guest';
+	    //libis_start	
+            //$user->role = 'guest';
+            $user->role = 'contributor';
+	    //libis_end
             $user->setPassword($user->email);
             $user->save();
             $map[$contributor['id']] = $user->id;

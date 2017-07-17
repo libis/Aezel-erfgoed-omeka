@@ -40,26 +40,20 @@ if (!isset($required) && $type->isFileAllowed()):
 <?php endif; ?>
 
 <?php $user = current_user(); ?>
-<?php if(( get_option('contribution_open') || get_option('contribution_strict_anonymous') ) && !$user) : ?>
+<?php if(get_option('contribution_simple') && !$user) : ?>
 <div class="field">
     <div class="two columns alpha">
-    <?php
-        if (get_option('contribution_strict_anonymous')) {
-            echo $this->formLabel('contribution_email', __('Email (Optional)')); 
-        } else {
-            echo $this->formLabel('contribution_email', __('Email (Required)'));
-        }
-    ?>
+    <?php echo $this->formLabel('contribution_simple_email', __('Email (Required)')); ?>
     </div>
     <div class="inputs five columns omega">
     <?php
-        if(isset($_POST['contribution_email'])) {
-            $email = $_POST['contribution_email'];
+        if(isset($_POST['contribution_simple_email'])) {
+            $email = $_POST['contribution_simple_email'];
         } else {
             $email = '';
         }
-        echo $this->formText('contribution_email', $email );
     ?>
+    <?php echo $this->formText('contribution_simple_email', $email ); ?>
     </div>
 </div>
 

@@ -2,8 +2,8 @@
 queue_js_file('login');
 $pageTitle = __('Log In');
 echo head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
-//$namespace = new Zend_Session_Namespace;
-//$namespace->redirect = "/vrijwilligers";
+$namespace = new Zend_Session_Namespace;
+$namespace->redirect = "/guest-user/user/me";
 ?>
 <div class="container">
     <!-- Content -->
