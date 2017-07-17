@@ -7280,6 +7280,20 @@ section.eigen .eigen-verhaal .img-in-text {
   border-radius: 0 2px 2px 0;
 }
 
+.europeana .source {
+  margin-right: 5px;
+}
+
+.europeana label {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.europeana .input-group {
+  margin-bottom: 10px;
+}
+
 .europeana .existing-element-drop-down {
   padding: .2rem .75rem;
   border: 1px solid rgba(0, 0, 0, 0.15);
