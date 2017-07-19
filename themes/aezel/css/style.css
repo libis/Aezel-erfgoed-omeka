@@ -7207,26 +7207,31 @@ section.eigen .eigen-verhaal .img-in-text {
   display: block;
 }
 
-.register .field, .login .field, .update-account .field {
+.register select, .login select, .update-account select, .contribution select {
+  border: 1px solid rgba(51, 51, 51, 0.2);
+  padding: 0.3rem 0.3rem;
+}
+
+.register .field, .login .field, .update-account .field, .contribution .field {
   margin-bottom: 1.5rem;
 }
 
-.register .field label, .login .field label, .update-account .field label {
+.register .field label, .login .field label, .update-account .field label, .contribution .field label {
   font-weight: 500;
   font-family: "Lato", sans-serif;
 }
 
-.register .field .explanation, .login .field .explanation, .update-account .field .explanation {
+.register .field .explanation, .login .field .explanation, .update-account .field .explanation, .contribution .field .explanation {
   font-size: 0.9rem;
   color: rgba(51, 51, 51, 0.6);
 }
 
-.register .field input, .login .field input, .update-account .field input {
+.register .field input, .login .field input, .update-account .field input, .contribution .field input {
   border: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.3rem 0.8rem;
 }
 
-.register #submit, .login #submit, .update-account #submit {
+.register #submit, .login #submit, .update-account #submit, .contribution #submit {
   background: #e8393a;
   font-family: "Lato", sans-serif;
   color: white;
@@ -7237,7 +7242,7 @@ section.eigen .eigen-verhaal .img-in-text {
   border-right: 2px solid #AB2222;
 }
 
-.register #submit:hover, .login #submit:hover, .update-account #submit:hover {
+.register #submit:hover, .login #submit:hover, .update-account #submit:hover, .contribution #submit:hover {
   background: #AB2222;
 }
 
