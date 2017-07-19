@@ -44,20 +44,20 @@
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
     <?php fire_plugin_hook('public_header', array('view'=>$this)); ?>
 
-    <nav class="navbar navbar-toggleable-md navbar-default ">
+    <nav class="navbar navbar-toggleable-lg navbar-default ">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <button class="navbar-toggler pull-xs-right navbar-text hidden-lg-up navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler pull-xs-right navbar-text hidden-xl-up navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               &#9776;
             </button>
             <a href="<?php echo url("/");?>" class="navbar-brand"><img src="<?php echo img("logos/book_logo.png");?>">LGGI  <span>Erfgoed</span></a>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse pull-xs-left navbar-toggleable-md collapse" id="navbarSupportedContent">
+            <div class="navbar-collapse pull-xs-left collapse navbar-toggleable-lg" id="navbarSupportedContent">
                 <?php echo public_nav_main_bootstrap(); ?>
             </div>
 
-            <form class="form-inline pull-sm-right navbar-toggleable-md collapse" role="search" action="<?php echo url('solr-search/')?>" method="GET">
+            <form class="form-inline pull-sm-right navbar-toggleable-lg collapse" role="search" action="<?php echo url('solr-search/')?>" method="GET">
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Zoek" value="" name="q">
                   <span class="input-group-btn">
