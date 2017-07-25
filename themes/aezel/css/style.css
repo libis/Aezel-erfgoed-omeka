@@ -6572,7 +6572,7 @@ hr {
 
 .jumbotron {
   background: #f6f6f6;
-  padding: 3rem 0;
+  padding: 2rem 0;
   margin-bottom: 0;
   border-radius: 0;
 }
@@ -6594,8 +6594,9 @@ hr {
 }
 
 .jumbotron .kijker {
-  padding: 0 0 30px;
+  padding: 0;
   color: rgba(51, 51, 51, 0.8);
+  overflow: auto;
 }
 
 .jumbotron .kijker h3 {
@@ -6621,10 +6622,16 @@ hr {
   overflow: hidden;
 }
 
+.jumbotron .kijker .carousel-wrap .carousel .carousel-item {
+  padding: 2rem;
+  background: #eee;
+}
+
 .jumbotron .kijker .carousel-wrap .carousel .carousel-inner > .carousel-item > img {
   max-width: 100%;
   margin: 0 auto;
   position: static;
+  height: 350px;
 }
 
 .jumbotron .kijker .carousel-wrap .carousel .carousel-caption {
@@ -6652,8 +6659,7 @@ hr {
 
 .jumbotron .kijker #right .well {
   background: transparent;
-  background: white;
-  padding: 2rem;
+  padding: 2rem 0 0 0;
   border: none;
   box-shadow: none;
 }
@@ -6709,8 +6715,8 @@ hr {
 }
 
 section.about {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 section.about .intro img {
@@ -6769,6 +6775,7 @@ section.about .link-to-all a:hover {
 
 section.eigen {
   padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
 }
 
 section.eigen .eigen-verhaal {
@@ -6824,7 +6831,7 @@ section.eigen .eigen-verhaal .img-in-text {
 .section-icons {
   background: #f6f6f6;
   padding-bottom: 25px;
-  padding: 3rem 0rem 3rem 0rem;
+  padding: 2rem 0rem 2rem 0rem;
 }
 
 .section-icons h3 {

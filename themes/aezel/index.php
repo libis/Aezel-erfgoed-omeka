@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <section class="kijker">
-                <div class="col-sm-12 col-md-7">
+                <div class="col-sm-12 col-md-6">
                     <div class="carousel-wrap">
                         <div data-ride="carousel" class="carousel slide" id="myCarousel">
                           <div role="listbox" class="carousel-inner">
@@ -12,7 +12,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="right" class="col-sm-12 col-md-5">
+                <div id="right" class="col-sm-12 col-md-6">
                     <div class="well"></div>
                     <p class="link-to-all">
                       <a href="<?php echo url("exhibits");?>"><i class="fa fa-angle-right" aria-hidden="true"></i>
