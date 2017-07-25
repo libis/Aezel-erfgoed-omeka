@@ -48,7 +48,7 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <button class="navbar-toggler pull-xs-right navbar-text hidden-xl-up navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              &#9776;
+              <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
             <a href="<?php echo url("/");?>" class="navbar-brand"><img src="<?php echo img("logos/book_logo.png");?>">LGGI  <span>Erfgoed</span></a>
 
