@@ -26,7 +26,6 @@ function simple_nav()
     "8" => array("kleur" => "style.min", "logo" => "book_logo"),//default
     "9" => array("kleur" => "blauw", "logo" => "earth_logo"),
     "10" => array("kleur" => "oranje", "logo" => "clock_logo"),
-    */
 
     switch ($page->id) {
         case "8":
@@ -48,9 +47,9 @@ function simple_nav()
         default:
             $linkx = false;
             $namex = false;
-    }
+    }*/
 
-    $html .= "<li><a href='".$linkx."'>".$namex."</a></li>";
+    $html .= "<li><a href='".url("/libco/libco/search")."'>Zoek online</a></li>";
     $html .="</ul>";
 
     return $html;
@@ -159,7 +158,9 @@ function libis_get_partners()
               <?php if (metadata($item, 'has files')) : ?>
                   <?php echo item_image('thumbnail',array('class'=>'logo'),0,$item);?>
               <?php endif; ?>
-              <h3><?php echo link_to_item(metadata($item, array('Dublin Core', 'Title')), array(), 'show', $item); ?></h3>
+              <?php if(metadata($item, array('Dublin Core', 'Title'))):?>
+                  <h3><a href=""><?php echo link_to_item(metadata($item, array('Dublin Core', 'Title')), array(), 'show', $item); ?></h3>
+              <?php endif; ?>
           </div>
       </div>
     <?php endforeach;
