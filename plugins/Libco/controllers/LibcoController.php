@@ -42,12 +42,12 @@ class Libco_LibcoController extends Omeka_Controller_AbstractActionController{
                 $this->_helper->flashMessenger('Error:'. $result['error'] ,  'error');
             }
             else{
-                $this->_helper->flashMessenger('Search result not returned from the server.',  'error');
+                $this->_helper->flashMessenger('Geen resultaten gevonden.',  'error');
                 return;
             }
         }
         else
-            $this->_helper->flashMessenger('Search source not selected.',  'error');
+            $this->_helper->flashMessenger('Er werd geen databank gekozen.',  'error');
     }
 
     private function getCurrentPage()

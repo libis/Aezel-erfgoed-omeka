@@ -64,7 +64,7 @@
                     <p><strong><?php echo __("Error: {$error}"); ?></strong></p>
 
                     <?php elseif ($totalResults): ?>
-                      
+
                     <?php echo pagination_links();?>
                     <?php
                         // fetch a list of current user collections
@@ -81,7 +81,7 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
-                               <label><?php echo __("New Collection Name"); ?></label>
+                               <label><?php echo __("Nieuwe collectie"); ?></label>
                             </div>
                             <div class="col-xs-12 col-md-8">
                                <div class="input-group">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
-                               <label><?php echo __("Add to Existing Collection"); ?></label>
+                               <label><?php echo __("Selecteer bestaande collectie"); ?></label>
                             </div>
                             <div class="col-xs-12 col-md-8">
                               <div class="input-group">
@@ -107,7 +107,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
-                              <input type="submit" name="btnsubmit" value="Import Items">
+                              <input type="submit" name="btnsubmit" value="Voeg toe">
                             </div>
                         </div>
                         <div class="row">
@@ -189,7 +189,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
-                              <input type="submit" name="btnsubmit" value="Import Items">
+                              <input type="submit" name="btnsubmit" value="Voeg toe">
                             </div>
                         </div>
                       </form>

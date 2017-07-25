@@ -72,10 +72,10 @@ class ImportRecord {
                 $invalidRecords++;
             }
         }
-        $this->messages[] = __("Number of items imported: %d", $counter);
+        $this->messages[] = __("Aantal geïmporteerde objecten: %d", $counter);
 
         if($invalidRecords > 0)
-            $this->messages[] = __("Invalid items: %d", $invalidRecords);
+            $this->messages[] = __("Onjuiste objecten: %d", $invalidRecords);
     }
 
 
@@ -100,8 +100,7 @@ class ImportRecord {
         // If collection exists and it is an add to existing collection request, proceed,
         // otherwise return with an error.
         if(!$this->addToExistingCollection && $collectionExists){
-            $this->messages[] = __("Collection '%s' already exists. Please choose another name or select add to
-            existing collection option.", $this->collectionName);
+            $this->messages[] = __("Deze collectie '%s' bestaat reeds. Gelieve een andere naam te kiezen of selecteer een bestaande collectie.", $this->collectionName);
             return;
         }
 
@@ -129,9 +128,9 @@ class ImportRecord {
 
                 $this->collectionAdded = true;
                 if($this->addToExistingCollection)
-                    $this->messages[] = __("Items added to the existing collection  '%s '.", $this->collectionName);
+                    $this->messages[] = __("Objecten werden toegevoegd aan bestaande collectie  '%s '.", $this->collectionName);
                 else
-                    $this->messages[] = __("Items added to a new collection '%s '.", $this->collectionName);
+                    $this->messages[] = __("Objecten werden toegevoegd aan nieuwe collectie '%s '.", $this->collectionName);
             }
 
         }
@@ -198,7 +197,7 @@ class ImportRecord {
 
             if(!empty($element['elementId']) && !empty($element['value'])){
                 /* For some of search sources (british library, internet achieves) value of creator field is returned
-				in array with extra depth as compared to other search sources. Therefore if value is an array, 
+				in array with extra depth as compared to other search sources. Therefore if value is an array,
 				we pickthe first value.
 				*/
                 if(is_array($element['value']))
@@ -222,7 +221,7 @@ class ImportRecord {
         if(!empty($url)){
             $context_array = array('http'=>array('proxy'=>get_option('libco_server_proxy'),'request_fulluri'=>true));
             $context = stream_context_create($context_array);
-	
+
             if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) //if url is invalid
                 return;
 
