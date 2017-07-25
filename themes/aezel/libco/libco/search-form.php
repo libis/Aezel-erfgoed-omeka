@@ -20,7 +20,7 @@ $formAttributes = array(
 
            <span class="input-group-btn">
              <?php echo $this->formButton('', __('Search'), array('type' => 'submit')); ?>
-            
+
            </span>
         </div>
     </div>
@@ -32,7 +32,8 @@ $formAttributes = array(
         $searchSources = $libcoService->getSearchSources();
         ?>
 
-    <p><?php echo __("Select Search Source"); ?></p>
+        <p><a target="_blank" href="<?php echo url('handleiding'); ?>"><?php echo __("Hulp nodig?"); ?></a></p>
+    <p><?php echo __("Selecteer database"); ?></p>
     <?php
         if(!empty($searchSources) && is_array($searchSources)){
             foreach($searchSources as $source){
@@ -50,7 +51,7 @@ $formAttributes = array(
             echo "<br>";
             echo "<div class='form-check'><label class='form-check-label'>";
             echo "<input type='checkbox' class='cbsourceselecctall' id='sourceselecctall' checked='checked'>";
-            echo __('All Sources');
+            echo __('Alle databases');
             echo "</label></div>";
         }
         else{
@@ -58,7 +59,7 @@ $formAttributes = array(
         }
     ?>
 
-    <p><a target="_blank" href="<?php echo url('europeanasearchguide'); ?>"><?php echo __("Need help?"); ?></a></p>
+    <p><a target="_blank" href="<?php echo url('handleiding'); ?>"><?php echo __("Hulp nodig?"); ?></a></p>
 
   </form>
   </div>
