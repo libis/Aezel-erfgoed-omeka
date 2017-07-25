@@ -64,6 +64,7 @@
                     <p><strong><?php echo __("Error: {$error}"); ?></strong></p>
 
                     <?php elseif ($totalResults): ?>
+                      
                     <?php echo pagination_links();?>
                     <?php
                         // fetch a list of current user collections
