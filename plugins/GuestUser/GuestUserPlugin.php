@@ -292,7 +292,7 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         if(isset($urls) && array_key_exists("UserProfiles", $urls)){
             $userUrls = $urls["UserProfiles"];
             if(array_key_exists("uri", $userUrls))
-                $html .= "<li><a href='".$userUrls["uri"]."'>" . __("Profile") . "</a></li>";
+                $html .= "<li><a href='".$userUrls["uri"]."'>" . __("Profiel") . "</a></li>";
 
         }
         //libis_end
@@ -313,10 +313,10 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
 
     private function storyUserWidget(){
         $html = "";
-        $widgetUserContent = array('label'=> __('My Content'));
+        $widgetUserContent = array('label'=> __('Mijn content'));
         $html .= "<ul>";
-        $html .= "<li><a href='".url('admin/exhibits', array('owner' => current_user()->id))."'>" . __("Stories") . "</a></li>";
-        $html .= "<li><a href='".url('admin/items/browse', array('owner' => current_user()->id))."'>" . __("Items") . "</a></li>";
+        $html .= "<li><a href='".url('admin/exhibits', array('owner' => current_user()->id))."'>" . __("Exhibits") . "</a></li>";
+        $html .= "<li><a href='".url('admin/items/browse', array('owner' => current_user()->id))."'>" . __("Objecten") . "</a></li>";
         $html .= "<li><a href='".url('admin/collections/browse', array('owner' => current_user()->id))."'>" . __("Collections") . "</a></li>";
         $html .= "</ul>";
         $widgetUserContent['content'] = $html;
@@ -343,7 +343,7 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
     }
-    
+
     public static function guestUserWidget($widget)
     {
         if(is_array($widget)) {

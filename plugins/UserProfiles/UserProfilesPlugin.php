@@ -169,14 +169,14 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         $incompleteTypes = $typesTable->getIncompleteProfileTypes();
         if(!empty($incompleteTypes)) {
             $type = $incompleteTypes[0];
-            $links['UserProfiles'] = array('label'=>'My Profiles', 'uri'=>url("/user-profiles/profiles/user/id/{$user->id}/type/{$type->id}"));
+            $links['UserProfiles'] = array('label'=>'Mijn profiel', 'uri'=>url("/user-profiles/profiles/user/id/{$user->id}/type/{$type->id}"));
             return $links;
         }
 
         $firstProfileTypes = $this->_db->getTable('UserProfilesType')->findBy(array(), 1);
         if(!empty($firstProfileTypes)) {
             $type = $firstProfileTypes[0];
-            $links['UserProfiles'] = array('label'=>'My Profiles', 'uri'=>url("/user-profiles/profiles/user/id/{$user->id}/type/{$type->id}"));
+            $links['UserProfiles'] = array('label'=>'Mijn profiel', 'uri'=>url("/user-profiles/profiles/user/id/{$user->id}/type/{$type->id}"));
         }
         return $links;
     }
@@ -186,7 +186,7 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         $recordTypes['UserProfilesProfile'] = __('User Profiles');
         return $recordTypes;
     }
-    
+
     public function filterApiResources($resources)
     {
         $resources['user_profiles_types'] = array(
@@ -219,7 +219,7 @@ class UserProfilesPlugin extends Omeka_Plugin_AbstractPlugin
         $elementAdapter->setResourceProperties(array('element_set' => 'ElementSet'));
         $adapters['user_profiles_multielements'] = $elementAdapter;
         $profileAdapter = new ApiImport_ResponseAdapter_Omeka_UserProfilesProfile(null, $args['endpointUri'], 'UserProfilesProfile');
-        $adapters['user_profiles'] = $profileAdapter; 
+        $adapters['user_profiles'] = $profileAdapter;
 
         $valueAdapter = new ApiImport_ResponseAdapter_Omeka_UserProfilesMulti(null, $args['endpointUri'], 'UserProfilesMultiValue');
         $valueAdapter->setResourceProperties(array(
