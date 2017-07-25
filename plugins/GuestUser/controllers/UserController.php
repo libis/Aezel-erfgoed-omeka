@@ -129,7 +129,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         if($form->getElement('account_status')->getValue() != 0)
             $user->setPassword($_POST['new_password']);
         //libis_end
-        
+
         //libis_start
         /* Get the value of the active checkbox on update account page. */
         $user->active = $form->getElement('account_status')->getValue();
@@ -290,11 +290,11 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         /* Add a checkbox for terms and conditions page. */
         $termscb = $form->addElement('checkbox', 'terms_conditions',
             array(
-                'label'             => __('I agree to the terms and conditions of the Europeana Space project'),
+                'label'             => "Ik ga akkoord met de <a href='".url("termsconditions")."' target = _blank>voorwarden</a> van deze website",
                 'escape'            => false,
                 'uncheckedValue'    => '',
                 'checkedValue'      => 'I Agree',
-                'description'       => '<a href='.url("termsconditions").' target = _blank>Terms and Conditions</a>',
+                'description'       => '',
                 'validators'        => array(
                     array('notEmpty', true, array(
                         'messages' => array(
@@ -451,4 +451,3 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         return $token;
     }
 }
-
