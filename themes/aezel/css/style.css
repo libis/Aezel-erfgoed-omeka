@@ -7095,6 +7095,59 @@ section.eigen .eigen-verhaal .img-in-text {
   padding-bottom: 1rem;
 }
 
+.exhibits .hTagcloud {
+  margin-top: 0.2rem;
+  font-family: "Lato", sans-serif;
+}
+
+.exhibits .hTagcloud ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  line-height: 1.8em;
+}
+
+.exhibits .hTagcloud li {
+  display: inline;
+  margin-right: 8px;
+}
+
+.exhibits .popular {
+  font-size: 100%;
+}
+
+.exhibits .v-popular {
+  font-size: 140%;
+}
+
+.exhibits .vv-popular {
+  font-size: 180%;
+}
+
+.exhibits .vvv-popular {
+  font-size: 220%;
+}
+
+.exhibits .vvvv-popular {
+  font-size: 260%;
+}
+
+.exhibits .vvvvv-popular {
+  font-size: 300%;
+}
+
+.exhibits .vvvvvv-popular {
+  font-size: 320%;
+}
+
+.exhibits .vvvvvvv-popular {
+  font-size: 340%;
+}
+
+.exhibits .vvvvvvvv-popular {
+  font-size: 360%;
+}
+
 .solr-container .content {
   padding: 3rem 0;
 }
