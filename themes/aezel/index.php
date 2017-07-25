@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="row">
-          <p class="link-to-all"><a href="">Alle partners</a></p>
+          <p class="link-to-all"><a href="<?php echo url("/solr-search?q=&facet=itemtype:%22Partner%22");?>">Alle partners</a></p>
         </div>
     </div>
 </section>

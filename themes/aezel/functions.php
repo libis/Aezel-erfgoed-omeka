@@ -133,8 +133,8 @@ function libis_get_partners()
               <?php if (metadata($item, 'has files')) : ?>
                   <?php echo item_image('thumbnail',array('class'=>'logo'),0,$item);?>
               <?php endif; ?>
-              <?php if(metadata($item, array('Dublin Core', 'Title'))):?>
-                  <h3><a href=""><?php echo link_to_item(metadata($item, array('Dublin Core', 'Title')), array(), 'show', $item); ?></h3>
+              <?php if($partnerlink = metadata($item, array('Item Type Metadata','page'))):?>
+                    <h3><a href="<?php echo url($partnerlink);?>"><?php echo metadata($item, array('Dublin Core', 'Title')); ?></a></h3>
               <?php endif; ?>
           </div>
       </div>
