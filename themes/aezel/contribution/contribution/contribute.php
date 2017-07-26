@@ -21,7 +21,7 @@ if(get_option('contribution_user_profile_type') && plugin_is_active('UserProfile
     queue_css_string("input.add-element {display: block}");
 }
 
-$head = array('title' => 'Contribute',
+$head = array('title' => 'Voeg een eigen object toe',
               'bodyclass' => 'contribution');
 echo head($head); ?>
 <script type="text/javascript">
@@ -42,17 +42,17 @@ enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-for
                         <?php $session = new Zend_Session_Namespace;
                               $session->redirect = absolute_url();
                         ?>
-                        <p>You must <a href='<?php echo url('guest-user/user/register'); ?>'>create an account</a> or <a href='<?php echo url('guest-user/user/login'); ?>'>log in</a> before contributing. You can still leave your identity to site visitors anonymous.</p>
+                        <p>Je moet een <a href='<?php echo url('guest-user/user/register'); ?>'>account aanmaken </a> of <a href='<?php echo url('guest-user/user/login'); ?>'>aanmelden</a> voor je een object kan toevoegen.</p>
                     <?php else: ?>
                         <form method="post" action="" enctype="multipart/form-data">
                             <fieldset id="contribution-item-metadata">
-                                <div class="inputs">
+                                <!--<div class="inputs">
                                     <label for="contribution-type"><?php echo __("What type of item do you want to contribute?"); ?></label>
                                     <?php $options = get_table_options('ContributionType' ); ?>
                                     <?php $typeId = isset($type) ? $type->id : '' ; ?>
                                     <?php echo $this->formSelect( 'contribution_type', $typeId, array('multiple' => false, 'id' => 'contribution-type') , $options); ?>
                                     <input type="submit" name="submit-type" id="submit-type" value="Select" />
-                                </div>
+                                </div>-->
                                 <div id="contribution-type-form">
                                 <?php if(isset($type)) { include('type-form.php'); }?>
                                 </div>
@@ -78,13 +78,13 @@ enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-for
                                     <?php /*echo $this->formLabel('contribution-anonymous', __("Contribute anonymously.")); */?>
                                     <!--libis_end-->
                                 </div>
-                                <p><?php echo __("In order to contribute, you must read and agree to the %s",  "<a href='" . contribution_contribute_url('terms') . "' target='_blank'>" . __('Terms and Conditions') . ".</a>"); ?></p>
+                                <p><?php echo __("Om een object toe te voegen moet u akkoord gaan met de <a href='" . url("voorwaarden") . "' target='_blank'>voorwaarden</a>"); ?></p>
                                 <div class="inputs">
                                     <?php $agree = isset( $_POST['terms-agree']) ?  $_POST['terms-agree'] : 0 ?>
                                     <?php echo $this->formCheckbox('terms-agree', $agree, null, array('1', '0')); ?>
-                                    <?php echo $this->formLabel('terms-agree', __('I agree to the Terms and Conditions.')); ?>
+                                    <?php echo $this->formLabel('terms-agree', __('Ik ga akkoord met de voorwaarden.')); ?>
                                 </div>
-                                <?php echo $this->formSubmit('form-submit', __('Contribute'), array('class' => 'submitinput')); ?>
+                                <?php echo $this->formSubmit('form-submit', __('Voeg toe'), array('class' => 'submitinput')); ?>
                             </fieldset>
                             <?php echo $csrf; ?>
                         </form>

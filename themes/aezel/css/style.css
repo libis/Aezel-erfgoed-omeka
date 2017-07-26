@@ -7390,6 +7390,10 @@ section.eigen .eigen-verhaal .img-in-text {
   background: #AB2222;
 }
 
+.contribution .inputs .explanation:first-child {
+  display: none;
+}
+
 .guest-user h2.guest-user-widget-label {
   background: #e8393a;
   color: #fff;

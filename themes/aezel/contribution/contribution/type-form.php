@@ -2,7 +2,6 @@
 <?php if (!$type): ?>
 <p><?php echo __('You must choose a contribution type to continue.'); ?></p>
 <?php else: ?>
-<h2><?php echo __('Contribute a %s', $type->display_name); ?></h2>
 
 <?php
 if ($type->isFileRequired()):
@@ -11,7 +10,7 @@ if ($type->isFileRequired()):
 
 <div class="field">
     <div class="two columns alpha">
-        <?php echo $this->formLabel('contributed_file', __('Upload a file')); ?>
+        <?php echo $this->formLabel('contributed_file', __('Voeg een foto of andere file toe')); ?>
     </div>
     <div class="inputs five columns omega">
         <?php echo $this->formFile('contributed_file', array('class' => 'fileinput')); ?>
@@ -31,7 +30,7 @@ if (!isset($required) && $type->isFileAllowed()):
 ?>
 <div class="field">
         <div class="two columns alpha">
-            <?php echo $this->formLabel('contributed_file', __('Upload a file (Optional)')); ?>
+            <?php echo $this->formLabel('contributed_file', __('Voeg een foto of andere file toe')); ?>
         </div>
         <div class="inputs five columns omega">
             <?php echo $this->formFile('contributed_file', array('class' => 'fileinput')); ?>
@@ -43,7 +42,7 @@ if (!isset($required) && $type->isFileAllowed()):
 <?php if(get_option('contribution_simple') && !$user) : ?>
 <div class="field">
     <div class="two columns alpha">
-    <?php echo $this->formLabel('contribution_simple_email', __('Email (Required)')); ?>
+    <?php echo $this->formLabel('contribution_simple_email', __('Email (Verplicht)')); ?>
     </div>
     <div class="inputs five columns omega">
     <?php
@@ -58,7 +57,7 @@ if (!isset($required) && $type->isFileAllowed()):
 </div>
 
 <?php else: ?>
-    <p><?php echo __('You are logged in as: %s', metadata($user, 'name')); ?>
+    <p><?php echo __('U bent ingelogd als: %s', metadata($user, 'name')); ?>
 <?php endif; ?>
     <?php
     //pull in the user profile form if it is set

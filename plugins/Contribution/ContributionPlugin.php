@@ -196,7 +196,7 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
             $this->hookInstall();
 
         }
-        
+
             if (version_compare($oldVersion, '3.0', '<')) {
             if(!is_writable(CONTRIBUTION_PLUGIN_DIR . "/upgrade_files")) {
                 throw new Omeka_Plugin_Installer_Exception("'upgrade_files' directory must be writable by the web server");
@@ -231,7 +231,7 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
 
             $this->_db->query($sql);
         }
-        
+
         if (version_compare($oldVersion, '3.0.2', '<')) {
             //fix some previous bad upgrades
             //need to check if contributor_posting was properly changed to anonymous
@@ -357,20 +357,20 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         );
         return $apiResources;
     }
-    
+
     public function filterApiImportOmekaAdapters($adapters, $args)
     {
         if (strpos($args['endpointUri'], 'omeka.net') !== false) {
-            $contributedItemAdapter = 
+            $contributedItemAdapter =
                 new ApiImport_ResponseAdapter_Omeka_GenericAdapter(null, $args['endpointUri'], 'ContributionContributedItem');
             $contributedItemAdapter->setResourceProperties(array('item' => 'Item'));
             $adapters['contributions'] = $contributedItemAdapter;
-            
-            $contributionTypeAdapter = 
+
+            $contributionTypeAdapter =
                 new ApiImport_ResponseAdapter_Omeka_GenericAdapter(null, $args['endpointUri'], 'ContributionType');
             $contributionTypeAdapter->setResourceProperties(array('item_type' => 'ItemType'));
             $adapters['contribution_types'] = $contributionTypeAdapter;
-    
+
             $contributionTypeElementsAdapter =
                 new ApiImport_ResponseAdapter_Omeka_GenericAdapter(null, $args['endpointUri'], 'ContributionTypeElement');
             $contributionTypeElementsAdapter->setResourceProperties(
@@ -381,22 +381,22 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
                     );
             $adapters['contribution_type_elements'] = $contributionTypeElementsAdapter;
         } else {
-            $contributionContributorsAdapter = 
+            $contributionContributorsAdapter =
                 new ApiImport_ResponseAdapter_OmekaNet_ContributorsAdapter(
                     null, $args['endpointUri'], 'User'
                     );
             $adapters['contribution_contributors'] = $contributionContributorsAdapter;
 
-            $contributedItemAdapter = 
+            $contributedItemAdapter =
                 new ApiImport_ResponseAdapter_OmekaNet_ContributedItemsAdapter(
                         null, $args['endpointUri'], 'ContributionContributedItem'
                     );
             $adapters['contribution_contributed_items'] = $contributedItemAdapter;
-            $typesAdapter = 
+            $typesAdapter =
                 new ApiImport_ResponseAdapter_Omeka_GenericAdapter(null, $args['endpointUri'], 'ContributionType');
             $typesAdapter->setResourceProperties(array('item_type' => 'ItemType'));
             $adapters['contribution_types'] = $typesAdapter;
-            $typeElementsAdapter = 
+            $typeElementsAdapter =
                 new ApiImport_ResponseAdapter_Omeka_GenericAdapter(null, $args['endpointUri'], 'ContributionTypeElement');
             $typeElementsAdapter->setResourceProperties(
                     array('type' => 'ContributionType',
@@ -787,7 +787,7 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
             $username = str_replace('.', '', $username);
             $user->username = $username;
             $user->active = true;
-	    //libis_start	
+	    //libis_start
             //$user->role = 'guest';
             $user->role = 'contributor';
 	    //libis_end
