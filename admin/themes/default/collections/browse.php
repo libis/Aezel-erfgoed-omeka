@@ -82,7 +82,7 @@ echo flash();
     <h2><?php echo __('You have no collections.'); ?></h2>
     <?php if(is_allowed('Collections', 'add')): ?>
         <p><?php echo __('Get started by adding your first collection.'); ?></p>
-        <a href="<?php echo html_escape(url('collections/add')); ?>" class="add big green button"><?php echo __('Add a Collection'); ?></a>
+        <a href="<?php echo html_escape(url('collections/add')); ?>" class="add small green button"><?php echo __('Add a Collection'); ?></a>
     <?php endif; ?>
 <?php endif; ?>
 
