@@ -8,7 +8,7 @@ echo head(array('title'=>$title, 'bodyclass'=>'exhibits'));
     <h2><?php echo __('There are no exhibits yet.'); ?></h2>
     
     <?php if (is_allowed('ExhibitBuilder_Exhibits','add')): ?>
-        <a href="<?php echo html_escape(url('exhibits/add')); ?>" class="big green add button"><?php echo __('Add an Exhibit'); ?></a></p>
+        <a href="<?php echo html_escape(url('exhibits/add')); ?>" class="small green add button"><?php echo __('Add an Exhibit'); ?></a></p>
         <!--libis_start-->
         <a href="<?php echo html_escape(url('exhibits', array('owner' => current_user()->id))); ?>" class="small green add button"><?php echo __('View Own Exhibit'); ?></a>
         <a href="<?php echo html_escape(url('exhibits')); ?>" class="small green add button"><?php echo __('View All Exhibit'); ?></a>
