@@ -18,28 +18,6 @@ function enableContributionAjaxForm(url) {
         // Remove the noscript-fallback type submit button.
         jQuery('#submit-type').remove();
 
-        // When the select is changed, AJAX in the type form
-        contributionType.change(function () {
-            var value = "2";
-            elementsToHide.hide();
-            form.hide(duration, function() {
-                form.empty();
-                if (value != "") {
-                    jQuery.post(url, {contribution_type: value}, function(data) {
-                       form.append(data);
-                       form.show(duration, function() {
-                           form.trigger('contribution-form-shown');
-                           form.trigger('omeka:tabselected');
-                           elementsToHide.show();
-                           //in case profile info is also being added, do the js for that form
-                           jQuery(form).trigger('omeka:elementformload');
-                           jQuery('.contribution-userprofile-visibility').click(toggleProfileEdit);
-                       });
-                    });
-                }
-            });
-        });
-
         jQuery.post(url, {contribution_type: 2}, function(data) {
            form.append(data);
            form.show(duration, function() {
