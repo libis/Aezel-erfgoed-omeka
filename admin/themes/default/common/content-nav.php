@@ -7,11 +7,17 @@
             ),
             array(
                 'label' => __('Items'),
-                'uri' => url('items')
+                //libis_start
+                /* By default user will see its own public/private items. */
+                'uri' => url('items/browse', array('owner' => current_user()->id))
+                //libis_end
             ),
             array(
                 'label' => __('Collections'),
-                'uri' => url('collections')
+                //libis_start
+                /* By default user will see its own public/private collections. */
+                'uri' => url('Collections', array('owner' => current_user()->id))
+                //libis_end
             ),
             array(
                 'label' => __('Item Types'),

@@ -62,6 +62,11 @@ class Table_Exhibit extends Omeka_Db_Table
                 case 'featured':
                     $this->filterByFeatured($select, $params['featured']);
                     break;
+                //libis_start
+                case 'owner': /* Filter a user's own exhibits from others. */
+                    $this->filterByUser($select, $params['owner'], 'owner_id');
+                    break;
+                //libis_end					
             }
         }
         return $select;
