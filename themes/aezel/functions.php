@@ -155,7 +155,9 @@ function libis_get_featured_exhibits()
           <H3><span>In de kijker</span></h3>
           <h1><?php echo exhibit_builder_link_to_exhibit($exhibit); ?></h1>
           <p><?php echo snippet_by_word_count(metadata($exhibit, 'description', array('no_escape' => true))); ?></p>
-          <p class="caption-auteur">Door: <strong>Tester</strong></p>
+          <?php if($exhibit->credits):?>
+            <p class="caption-auteur">Door: <strong><?php echo $exhibit->credits;?></strong></p>
+          <?php endif;?>
         </div>
       </div>
       <?php $i++; ?>
