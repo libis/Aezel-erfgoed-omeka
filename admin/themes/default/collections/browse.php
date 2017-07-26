@@ -76,7 +76,7 @@ echo flash();
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
     <?php else: ?>
-        <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
+        <p style="clear:both;"><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
     <?php endif; ?> 
 <?php else: ?>
     <h2><?php echo __('You have no collections.'); ?></h2>
