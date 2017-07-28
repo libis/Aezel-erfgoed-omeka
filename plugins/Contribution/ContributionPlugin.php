@@ -422,7 +422,7 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         $currentClass = get_class() ;
         if(isset($user, $currentClass)){
             $pluginName = str_replace('plugin', '', strtolower($currentClass));
-            $hide = get_option(strtolower($pluginName.'_'.$user->role.'_hide'));
+            $hide = get_option(strtolower($pluginName.'_'.__(Inflector::humanize($user->role)).'_hide'));
             if($hide == 1)
                 return $nav;
         }
