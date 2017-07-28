@@ -284,6 +284,12 @@ SQL
      */
     public function filterAdminNavigationMain($nav)
     {
+        //libis_start
+        //hide plugin from left navigation menu in admin view
+        if(in_array(current_user()->role, array('contributor', 'Guest', 'Researcher')))
+            return $nav;
+        //libis_end
+		
         $nav[] = array(
             'label' => __('Solr Search'), 'uri' => url('solr-search/server')
         );
