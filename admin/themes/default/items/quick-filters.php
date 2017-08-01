@@ -8,7 +8,7 @@
         <li><a href="<?php echo url('items/browse', array('featured' => 1)); ?>"><?php echo __('Featured'); ?></a></li>
         <!--libis_start-->
         <!--Add a new filter to see own items(public and private)-->
-        <li><a href="<?php echo url('items/browse', array('owner' => current_user()->id)); ?>"><?php echo __('Own'); ?></a></li>
+        <li><a href="<?php echo url('items/browse', array('owner' => current_user()->id)); ?>"><?php echo __('Eigen items'); ?></a></li>
         <!--libis_end-->		
     </ul>
     </li>
