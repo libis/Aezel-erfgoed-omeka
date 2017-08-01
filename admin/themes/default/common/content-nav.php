@@ -28,6 +28,19 @@
                 'uri' => url('tags')
             )
         );
+		
+        //libis_start
+        // hide item types from admin navigation for restricted users
+        $buffer = array();
+        foreach ($mainNav as $item => $value){
+            if($value['label'] === __('Item Types') && in_array(current_user()->role, array('contributor', 'Guest', 'Researcher')))
+                unset($mainNav[$item]);
+            else
+                $buffer[] = $value;
+        }
+        $mainNav = $buffer;
+        //libis_end		
+		
         $nav = nav($mainNav, 'admin_navigation_main');
         echo $nav;
     ?>
