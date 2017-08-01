@@ -16,7 +16,7 @@ echo flash();
         </a>
 
         <a href="<?php echo html_escape(url('Collections')); ?>" class="small green button">
-            <?php echo __('View All Collections'); ?>
+            <?php echo __('Bekijk alle collecties'); ?>
         </a>
         <!--Libis_end-->		
     <?php endif; ?>
