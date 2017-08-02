@@ -26,7 +26,7 @@ $head = array('title' => 'Voeg een eigen object toe',
 echo head($head); ?>
 <script type="text/javascript">
 // <![CDATA[
-enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-form')); ?>);
+//enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-form')); ?>);
 // ]]>
 </script>
 <div class="container">
@@ -53,6 +53,7 @@ enableContributionAjaxForm(<?php echo js_escape(url($contributionPath.'/type-for
                                     <?php echo $this->formSelect( 'contribution_type', $typeId, array('multiple' => false, 'id' => 'contribution-type') , $options); ?>
                                     <input type="submit" name="submit-type" id="submit-type" value="Select" />
                                 </div>-->
+                                <input type="hidden" name="contribution_type" value="2">
                                 <div id="contribution-type-form">
                                 <?php if(isset($type)) { include('type-form.php'); }?>
                                 </div>

@@ -18,7 +18,7 @@ function enableContributionAjaxForm(url) {
         // Remove the noscript-fallback type submit button.
         jQuery('#submit-type').remove();
 
-        jQuery.post(url, {contribution_type: 2}, function(data) {
+        jQuery.post(url, {contribution_type: 3}, function(data) {
            form.append(data);
            form.show(duration, function() {
                form.trigger('contribution-form-shown');

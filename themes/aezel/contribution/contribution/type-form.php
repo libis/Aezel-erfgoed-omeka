@@ -1,4 +1,5 @@
 
+<?php $type = get_db()->getTable('ContributionType')->find('2');?>
 <?php if (!$type): ?>
 <p><?php echo __('You must choose a contribution type to continue.'); ?></p>
 <?php else: ?>
