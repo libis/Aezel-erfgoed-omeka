@@ -290,11 +290,11 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         /* Add a checkbox for terms and conditions page. */
         $termscb = $form->addElement('checkbox', 'terms_conditions',
             array(
-                'label'             => "Ik ga akkoord met de <a href='".url("termsconditions")."' target = _blank>voorwarden</a> van deze website",
+                'label'             => "Ik ga akkoord met de voorwaarden van deze website",
                 'escape'            => false,
                 'uncheckedValue'    => '',
                 'checkedValue'      => 'I Agree',
-                'description'       => '',
+                'description'       => '<a href='".url("termsconditions")."' target = _blank>Voorwaarden</a>',
                 'validators'        => array(
                     array('notEmpty', true, array(
                         'messages' => array(
