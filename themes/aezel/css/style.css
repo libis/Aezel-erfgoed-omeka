@@ -7351,31 +7351,43 @@ section.eigen .eigen-verhaal .img-in-text {
   display: block;
 }
 
-.register select, .login select, .update-account select, .contribution select {
+.register select, .login select, .update-account select, .contribution select, .user-profile select {
   border: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.3rem 0.3rem;
 }
 
-.register .field, .login .field, .update-account .field, .contribution .field {
+.register .field, .login .field, .update-account .field, .contribution .field, .user-profile .field {
   margin-bottom: 1.5rem;
 }
 
-.register .field label, .login .field label, .update-account .field label, .contribution .field label {
+.register .field label, .login .field label, .update-account .field label, .contribution .field label, .user-profile .field label {
   font-weight: 500;
   font-family: "Lato", sans-serif;
 }
 
-.register .field .explanation, .login .field .explanation, .update-account .field .explanation, .contribution .field .explanation {
+.register .field .explanation, .login .field .explanation, .update-account .field .explanation, .contribution .field .explanation, .user-profile .field .explanation {
   font-size: 0.9rem;
   color: rgba(51, 51, 51, 0.6);
 }
 
-.register .field input, .login .field input, .update-account .field input, .contribution .field input {
+.register .field input, .login .field input, .update-account .field input, .contribution .field input, .user-profile .field input {
   border: 1px solid rgba(51, 51, 51, 0.2);
   padding: 0.3rem 0.8rem;
 }
 
-.register #submit, .login #submit, .update-account #submit, .contribution #submit {
+.register .field .add-element, .login .field .add-element, .update-account .field .add-element, .contribution .field .add-element, .user-profile .field .add-element {
+  display: block;
+}
+
+.register .field .use-html, .login .field .use-html, .update-account .field .use-html, .contribution .field .use-html, .user-profile .field .use-html {
+  font-size: 0.9rem;
+}
+
+.register .field .use-html input, .login .field .use-html input, .update-account .field .use-html input, .contribution .field .use-html input, .user-profile .field .use-html input {
+  margin-left: 5px;
+}
+
+.register #submit, .register .green, .login #submit, .login .green, .update-account #submit, .update-account .green, .contribution #submit, .contribution .green, .user-profile #submit, .user-profile .green {
   background: #e8393a;
   font-family: "Lato", sans-serif;
   color: white;
@@ -7386,8 +7398,13 @@ section.eigen .eigen-verhaal .img-in-text {
   border-right: 2px solid #AB2222;
 }
 
-.register #submit:hover, .login #submit:hover, .update-account #submit:hover, .contribution #submit:hover {
+.register #submit:hover, .register .green:hover, .login #submit:hover, .login .green:hover, .update-account #submit:hover, .update-account .green:hover, .contribution #submit:hover, .contribution .green:hover, .user-profile #submit:hover, .user-profile .green:hover {
   background: #AB2222;
+}
+
+.register .delete-confirm, .login .delete-confirm, .update-account .delete-confirm, .contribution .delete-confirm, .user-profile .delete-confirm {
+  padding: 10px 0;
+  display: block;
 }
 
 .contribution .inputs .explanation:first-child {

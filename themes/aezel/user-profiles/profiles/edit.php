@@ -1,15 +1,5 @@
 <?php
-if(!is_admin_theme()) {
-    queue_css_file('admin-theme');
-    queue_css_file('profiles');
-    queue_css_file('admin-skeleton');
-    $css = "div.container-twelve div.ten.columns {width: 100%;}
-     ul#section-nav {margin: 0px;}
-     div.container-twelve div.five.columns {width: auto;}
 
-    ";
-    queue_css_string($css);
-}
 
 queue_js_file('admin-globals');
 queue_js_file('tiny_mce', 'javascripts/vendor/tiny_mce');
@@ -40,66 +30,52 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 });
 //]]>
 </script>
-<?php if(!is_admin_theme()) :?>
-<div class="container-twelve">
-<?php endif;?>
+<div class="container">
+    <!-- Content -->
+    <div class="content-wrapper bs-docs-section user-profile">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 content">
 
-<ul id='section-nav' class='navigation tabs'>
-<?php
+              <?php if(count($profile_types) > 1): ?>
+              <p class='warning'><?php echo __("Save changes before moving to edit a new profile type."); ?></p>
+              <?php endif; ?>
 
-$typesNav = array();
-foreach($profile_types as $type) {
-    $navArray = array('label'=>$type->label, 'uri'=>url('user-profiles/profiles/edit/id/' . $user->id .'/type/'.$type->id));
-    $typesNav[$type->label] = $navArray ;
-}
+              <?php echo flash(); ?>
 
-echo nav($typesNav, 'user_profiles_types_user_edit');
-?>
-</ul>
-<?php if(count($profile_types) > 1): ?>
-<p class='warning'><?php echo __("Save changes before moving to edit a new profile type."); ?></p>
-<?php endif; ?>
+              <form method="post" action="">
+              <section id="edit-form" class="seven columns alpha">
 
-<?php echo flash(); ?>
+              <h1><?php echo __('Pas je profiel aan', $userprofilestype->label); ?></h1>
 
-<div id="primary" class="ten columns alpha">
-
-
-<form method="post" action="">
-<section id="edit-form" class="seven columns alpha">
-
-<h1><?php echo __('Edit your %s profile', $userprofilestype->label); ?></h1>
-
-<p class="user-profiles-profile-description">
-    <?php echo $userprofilestype->description; ?>
-</p>
-    <?php foreach($userprofilestype->Elements as $element):?>
-    <?php echo $this->profileElementForm($element, $userprofilesprofile); ?>
-    <?php endforeach; ?>
-</section>
-
-<section class="three columns omega">
-    <div id='save' class='panel'>
-        <p class='warning'><?php echo __("Profile type: ") . $userprofilestype->label; ?></p>
-        <input type="submit" value='<?php echo __('Save Changes'); ?>' name='submit' class='big green button'/>
-        <?php if($userprofilesprofile->exists()): ?>
-        <a href="<?php echo url('user-profiles/profiles/delete-confirm/id/' . $userprofilesprofile->id); ?>" class="big red button delete-confirm"><?php echo __('Delete'); ?></a>
-        <?php endif; ?>
-        <div class="public">
-            <?php if($userprofilestype->public == 0): ?>
-            <p><?php echo __('This profile type is private'); ?></p>
-            <input type="hidden" value="0" name="public" />
-            <?php else: ?>
-            <label for="public"><?php echo __('Public'); ?></label>
-            <input type="hidden" value="0" name="public" />
-            <input type="checkbox" value="1" id="public" name="public" <?php echo  $userprofilesprofile->public ? "checked='checked'" : ""; ?> />
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
-</form>
+              <p class="user-profiles-profile-description">
+                  <?php echo $userprofilestype->description; ?>
+              </p>
+                  <?php foreach($userprofilestype->Elements as $element):?>
+                  <?php echo $this->profileElementForm($element, $userprofilesprofile); ?>
+                  <?php endforeach; ?>
+              </section>
+            </div>
+              <div class="col-md-3  content">
+                  <div id='save' class='panel'>
+                    <input type="submit" value='<?php echo __('Save Changes'); ?>' name='submit' class='big green button'/>
+                      <?php if($userprofilesprofile->exists()): ?>
+                      <a href="<?php echo url('user-profiles/profiles/delete-confirm/id/' . $userprofilesprofile->id); ?>" class="big red button delete-confirm"><?php echo __('Delete'); ?></a>
+                      <?php endif; ?>
+                      <div class="public">
+                          <?php if($userprofilestype->public == 0): ?>
+                          <p><?php echo __('This profile type is private'); ?></p>
+                          <input type="hidden" value="0" name="public" />
+                          <?php else: ?>
+                          <label for="public"><?php echo __('Public'); ?></label>
+                          <input type="hidden" value="0" name="public" />
+                          <input type="checkbox" value="1" id="public" name="public" <?php echo  $userprofilesprofile->public ? "checked='checked'" : ""; ?> />
+                          <?php endif; ?>
+                      </div>
+                  </div>
+              </form>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
-<?php if(!is_admin_theme()) :?>
-</div>
-<?php endif; ?>
 <?php echo foot(); ?>

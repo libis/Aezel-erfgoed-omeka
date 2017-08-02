@@ -294,7 +294,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
                 'escape'            => false,
                 'uncheckedValue'    => '',
                 'checkedValue'      => 'I Agree',
-                'description'       => '<a href='".url("termsconditions")."' target = _blank>Voorwaarden</a>',
+                'description'       => '<a href='.url("termsconditions").' target = _blank>Voorwaarden</a>',
                 'validators'        => array(
                     array('notEmpty', true, array(
                         'messages' => array(
