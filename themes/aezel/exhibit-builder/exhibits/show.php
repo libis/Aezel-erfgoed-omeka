@@ -9,7 +9,7 @@ echo head(array(
       <div class="col-md-9 content">
             <p id="simple-pages-breadcrumbs">
               <span><a href="<?php echo url('/');?>">Home</a></span>
-               > <span><a href="<?php echo url('browse/exhibits');?>">Tentoonstellingen</a></span>
+               > <span><a href="<?php echo url('/exhibits');?>">Tentoonstellingen</a></span>
                > <?php echo exhibit_builder_link_to_exhibit($exhibit); ?>
                > <?php echo metadata('exhibit_page', 'title'); ?>
              </p>
