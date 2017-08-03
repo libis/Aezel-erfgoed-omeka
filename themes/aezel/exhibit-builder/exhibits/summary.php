@@ -16,14 +16,12 @@
             <?php endif; ?>
 
             <?php if (($exhibit->cover_image_file_id)) : ?>
-            <?php
-              $file = get_record_by_id('File',$exhibit->cover_image_file_id);
-              $cover_url = $file->getWebPath('fullsize');
-            ?>
+              <?php
+                $file = get_record_by_id('File',$exhibit->cover_image_file_id);
+                $cover_url = $file->getWebPath('fullsize');
+              ?>
+              <img class="cover" src="<?php echo $cover_url ?>">
             <?php endif; ?>
-
-            <img class="cover" src="<?php echo $cover_url ?>">
-
 
             <?php if ($exhibitDescription = metadata('exhibit', 'description', array('no_escape' => true))) : ?>
             <div class="exhibit-description">
