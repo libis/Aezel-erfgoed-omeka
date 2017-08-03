@@ -4,7 +4,7 @@ echo head(array(
     'bodyclass' => 'exhibits show', ));
 ?>
 <section class="metadata-section general-section exhibit-show-section">
-  <div class='container' role="main" tabindex="-1">
+  <div id="content" class='container' role="main" tabindex="-1">
     <div class="row ">
       <div class="col-md-9 content">
             <p id="simple-pages-breadcrumbs">
