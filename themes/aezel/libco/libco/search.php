@@ -80,32 +80,6 @@
                         <form method="post" class="ajax" id="main">
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                               <label><?php echo __("Nieuwe collectie"); ?></label>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                               <div class="input-group">
-                                  <span class="input-group-addon">
-                                    <input type="checkbox" name="chbcollection" aria-label="Checkbox for following text input">
-                                  </span>
-                                  <input type="text" class="form-control" name="txtncollectionname" aria-label="<?php echo __("Create A New Collection"); ?>" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                               <label><?php echo __("Selecteer bestaande collectie"); ?></label>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <div class="input-group">
-                                <span class="input-group-addon">
-                                   <input type="checkbox" name="chbexistingcollection">
-                                </span>
-                                <?php echo $this->formSelect('existingcollections', 'Existing Collections', array('class' => 'existing-element-drop-down', 'disabled' => 1),$usercollections, array()); ?>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-xs-12 col-md-12">
                               <input type="submit" name="btnsubmit" value="Voeg toe">
                             </div>
