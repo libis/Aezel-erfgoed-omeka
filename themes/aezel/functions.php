@@ -10,6 +10,7 @@ function public_nav_main_bootstrap()
 function simple_nav()
 {
     $page = get_current_record('SimplePagesPage');
+    $parent = false;
 
     $links = simple_pages_get_links_for_children_pages();
     if (!$links) :
@@ -21,8 +22,15 @@ function simple_nav()
         $html .= "<li><a href='".$link['uri']."'>".$link['label']."</a></li>";
     endforeach;
 
-    $html .= "<li><a href='".url("/libco/libco/search")."'>Zoek online</a></li>";
-    if($page->title ="Ga zelf aan de slag"):
+    $pageAncestors = get_db()->getTable('SimplePagesPage')->findAncestorPages($page->id);
+    foreach ($pageAncestors as $p) :
+        if ($p->id == '54') :
+            $parent = true;
+        endif;
+    endforeach;
+
+    if($parent || ($page->title == "Ga zelf aan de slag")):
+        $html .= "<li><a href='".url("/libco/libco/search")."'>Zoek online</a></li>";
         $html .= "<li><a href='".url("/contribution")."'>Voeg object toe</a></li>";
     endif;
     $html .="</ul>";
