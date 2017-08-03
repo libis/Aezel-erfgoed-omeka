@@ -55,8 +55,8 @@ class ImportRecord {
                 )
                     $isPublic = 1;
 
-                /* Get the type id to add to the item. Type id is name of the Source where this record was searched. */
-                $itemTypeId = $this->getItemType($recordArray['search_source']);
+                /* Get the type id to add to the item. For Aezel project all imported items are of type 'Object'. */
+                $itemTypeId = $this->getItemType('Object'); // if item type does not exist it will be created.
 
                 $itemId = $this->addRecord($elementsToAdd, $isPublic, $isFeatured, $itemTypeId);
                 if(!empty($itemId)) /* Record successfully imported. */
