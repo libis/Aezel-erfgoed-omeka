@@ -7197,6 +7197,10 @@ section.eigen .eigen-verhaal .img-in-text {
   font-size: 1.2rem;
 }
 
+.solr-container .result .description {
+  margin-bottom: 1.5rem;
+}
+
 .solr-container #solr-applied-facets ul {
   color: #fff;
   margin: 0;
@@ -7407,6 +7411,10 @@ section.eigen .eigen-verhaal .img-in-text {
 .item #comments-container #comment-form .commenting-explanation {
   font-family: sans-serif;
   font-size: 0.9rem;
+}
+
+.single {
+  margin-bottom: 1.5rem;
 }
 
 .single img {

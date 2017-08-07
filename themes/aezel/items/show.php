@@ -12,7 +12,6 @@
         <?php endif; ?>
       </div>
     </div>
-
     <div class="row">
       <?php if (metadata('item', 'has files')) : ?>
         <div class="col-md-4">
@@ -22,7 +21,6 @@
 
       <div class="col-md-8">
         <?php if (metadata('item', 'Item Type Name') !== 'Nieuws') : ?>
-
             <?php echo all_element_texts('item', array("show_element_set_headings"=>false)); ?>
         <?php else : ?>
             <div class="date"><?php echo metadata('item', array('Dublin Core', 'Date')); ?></div>

@@ -7,7 +7,8 @@
   </div>
 </div>
 <?php endif; ?>
-<div class="row single">
+<div class="row single single-logo">
+
   <?php if ($img = item_image('fullsize', array(), 0, $item)) {?>
       <div class="col-xs-12 col-sm-4">
           <?php echo $img; ?>
@@ -19,7 +20,9 @@
           <p class="item-description"><?php echo $description; ?></p>
       <?php endif; ?>
   </div>
+
 </div>
+<hr>
 <?php if ($img = item_image('fullsize', array(), 1, $item)) {?>
 <div class="row single">
     <div class="col-xs-12">

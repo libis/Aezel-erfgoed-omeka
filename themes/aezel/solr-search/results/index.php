@@ -154,7 +154,7 @@
                             if ($doc->resulttype == 'Item') :
                               $item = get_db()->getTable($doc->model)->find($doc->modelid);
                               if($text = metadata($item, array('Dublin Core','Description'),array('snippet'=>'150'))):
-                                echo $text;
+                                echo "<div class='description'>".$text."</div>";
                               endif;
                             endif;
                         ?>
