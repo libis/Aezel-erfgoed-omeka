@@ -55,8 +55,8 @@ class ImportRecord {
                 )
                     $isPublic = 1;
 
-                /* Get the type id to add to the item. Type id is name of the Source where this record was searched. */
-                $itemTypeId = $this->getItemType($recordArray['search_source']);
+                /* Get the type id to add to the item. For Aezel project all imported items are of type 'Object'. */
+                $itemTypeId = $this->getItemType('Object'); // if item type does not exist it will be created.
 
                 $itemId = $this->addRecord($elementsToAdd, $isPublic, $isFeatured, $itemTypeId);
                 if(!empty($itemId)) /* Record successfully imported. */
@@ -277,6 +277,10 @@ class ImportRecord {
             return;
 
         $recordFields = $responseRecord->getAllFields();
+		
+        /* For aezel project add search source into dc:source field.*/
+        $recordFields['search_source'] = $recordToAdd['search_source'];		
+		
         foreach($recordFields as $field => $fieldValue){
             if(empty($fieldValue) || $fieldValue === "null")
                 continue;
@@ -385,6 +389,10 @@ class ImportRecord {
                         }
                         $fieldValue = $media;
                         break;
+						
+                    case 'search_source': /* For aezel project map search source to dc:source field.*/
+                        $elementName = 'Source';
+                        break;						
                 }
 
                 if(!empty($elementName))
