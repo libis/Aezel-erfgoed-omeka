@@ -44,13 +44,13 @@ $formAttributes = array(
                     continue;
                 echo "";
                 echo "<div class='form-check'><label class='form-check-label'>";
-                echo $view->formCheckbox('searchsource_'.$sourceName, null, array('class' => 'source', 'checked'=>'checked'));
+                echo $view->formCheckbox('searchsource_'.$sourceName, null, array('class' => 'source'));
                 echo $sourceName;
                 echo "</label></div>";
             }
             echo "<br>";
             echo "<div class='form-check'><label class='form-check-label'>";
-            echo "<input type='checkbox' class='cbsourceselecctall' id='sourceselecctall' checked='checked'>";
+            echo "<input type='checkbox' class='cbsourceselecctall' id='sourceselecctall'>";
             echo __('Alle databases');
             echo "</label></div>";
         }
