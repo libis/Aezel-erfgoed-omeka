@@ -6809,7 +6809,7 @@ section.eigen .eigen-verhaal .lees-meer a {
   padding: 5px 10px !important;
 }
 
-section.eigen .eigen-verhaal .description {
+section.eigen .eigen-verhaal .description p {
   font-size: 1.2rem;
   font-family: "Lato", sans-serif;
   font-weight: bold;
@@ -7232,6 +7232,7 @@ section.eigen .eigen-verhaal .img-in-text {
   color: #fff;
   font-weight: bold;
   font-family: "Lato", sans-serif;
+  margin-left: 0.2rem;
 }
 
 .solr-container #solr-applied-facets ul li a i {
@@ -7274,17 +7275,19 @@ section.eigen .eigen-verhaal .img-in-text {
 
 .solr-container #solr-facets .facet .facet-name::before {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   width: 18px;
   display: inline-block;
 }
 
 .solr-container #solr-facets .facet .facet-name[aria-expanded="true"]::before {
-  content: '-';
+  content: '\f0d8';
+  font-family: "FontAwesome";
 }
 
 .solr-container #solr-facets .facet .facet-name[aria-expanded="false"]::before {
-  content: '+';
+  content: '\f0d7';
+  font-family: "FontAwesome";
 }
 
 .solr-container #solr-facets .facet ul {

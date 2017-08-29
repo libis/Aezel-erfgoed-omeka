@@ -34,9 +34,10 @@
                 </div>
                 <div class="col-md-8 col-sm-8 col-lg-9 col-xs-12">
                     <img src="<?php echo img("logos/book_logo.png");?>" class="hidden-sm-up pull-left img-in-text" />
-                    <p class="description">Wil jij een eigen verhaal over onze streek met ons delen?
-                    Morbi pharetra tristique dolor nec sagittis. Suspendisse pellentesque lacinia hendrerit. Sed volutpat tristique libero ac mollis. Donec non nisl auctor, tristique lectus nec, dignissim orci.
-                    </p>
+                    <div class="description">
+                      <?php echo libis_get_simple_page_content("Vertel je eigen verhaal - front page");?>
+                    </div>
+
                     <p class="lees-meer"><a href="<?php echo url("aan-de-slag");?>">Ga zelf aan de slag</a></p>
                 </div>
               </div>

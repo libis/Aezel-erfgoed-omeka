@@ -47,7 +47,8 @@
 
                 <!-- Remove link. -->
                 <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-                <a href="<?php echo $url; ?>">x</a>
+                <a href="<?php echo $url; ?>"><i class="fa fa-times" aria-hidden="true"></i>
+</a>
 
               </li>
             <?php endforeach; ?>

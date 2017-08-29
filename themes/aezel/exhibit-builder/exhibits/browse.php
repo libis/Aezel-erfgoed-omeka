@@ -28,7 +28,7 @@ echo head(array('title' => $title, 'bodyclass' => 'exhibits browse'));
               <div class="row">
                 <div class="col-md-12">
                     <p class="sub-nav">
-                        <a href="<?php echo url('exhibits');?>"><?php echo __('Zoek doorheen alle tentoonstellingen');?></a>
+                        <a href="<?php echo url('exhibits');?>"><?php echo __('Doorzoek alle tentoonstellingen');?></a>
                         <a href="<?php echo url('exhibits/tags');?>"><?php echo __('Browse by Tag');?></a>
                     </p>
                   </div>
