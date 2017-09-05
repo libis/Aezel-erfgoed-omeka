@@ -50,7 +50,7 @@
             <button class="navbar-toggler pull-xs-right navbar-text hidden-xl-up navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
-            <a href="<?php echo url("/");?>" class="navbar-brand"><img src="<?php echo img("logos/book_logo.png");?>">LGGI  <span>Erfgoed</span></a>
+            <a href="<?php echo url("/");?>" class="navbar-brand"><img src="<?php echo img("logos/book_logo.png");?>">Aezel  <span>Erfgoed</span></a>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse pull-xs-left collapse navbar-toggleable-lg" id="navbarSupportedContent">
