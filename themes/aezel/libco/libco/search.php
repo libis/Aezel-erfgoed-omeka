@@ -29,7 +29,7 @@
                 if(isset($_POST['eurecords'])){
                     $currentUser = current_user();
                     if(!isset($currentUser)){
-                        echo 'To import items from Europeana into Omeka you need to login.';
+                        echo 'Om items te importeren moet u <a href="'.url("/users/login").'">inloggen</a>.';
                         return;
                     }
                     $userId = $currentUser->id;
