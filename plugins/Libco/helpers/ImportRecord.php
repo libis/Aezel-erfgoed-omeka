@@ -72,10 +72,10 @@ class ImportRecord {
                 $invalidRecords++;
             }
         }
-        $this->messages[] = __("Aantal geïmporteerde objecten: %d", $counter);
+        $this->messages[] = __("Aantal geïmporteerde items: %d", $counter);
 
         if($invalidRecords > 0)
-            $this->messages[] = __("Onjuiste objecten: %d", $invalidRecords);
+            $this->messages[] = __("Onjuiste items: %d", $invalidRecords);
     }
 
 
@@ -277,10 +277,10 @@ class ImportRecord {
             return;
 
         $recordFields = $responseRecord->getAllFields();
-		
+
         /* For aezel project add search source into dc:source field.*/
-        $recordFields['search_source'] = $recordToAdd['search_source'];		
-		
+        $recordFields['search_source'] = $recordToAdd['search_source'];
+
         foreach($recordFields as $field => $fieldValue){
             if(empty($fieldValue) || $fieldValue === "null")
                 continue;
@@ -389,10 +389,10 @@ class ImportRecord {
                         }
                         $fieldValue = $media;
                         break;
-						
+
                     case 'search_source': /* For aezel project map search source to dc:source field.*/
                         $elementName = 'Source';
-                        break;						
+                        break;
                 }
 
                 if(!empty($elementName))

@@ -5,7 +5,7 @@
     <!-- Content -->
     <div class="row">
       <div class="col-md-12">
-        <p id="simple-pages-breadcrumbs"><a href="<?php echo url("/");?>">Home</a> &gt; <a href=<?php echo url('/solr-search?facet=itemtype:"'.metadata('item', 'Item Type Name').'"');?>>Objecten</a> &gt; <?php echo metadata('item', array('Dublin Core', 'Title')); ?></p>
+        <p id="simple-pages-breadcrumbs"><a href="<?php echo url("/");?>">Home</a> &gt; <a href=<?php echo url('/solr-search?facet=itemtype:"'.metadata('item', 'Item Type Name').'"');?>>Items</a> &gt; <?php echo metadata('item', array('Dublin Core', 'Title')); ?></p>
         <h1><?php echo metadata('item', array('Dublin Core', 'Title')); ?></h1>
         <?php if (metadata('item', 'Collection Name')) : ?>
             <h3><?php echo link_to_collection_for_item(); ?></h3>

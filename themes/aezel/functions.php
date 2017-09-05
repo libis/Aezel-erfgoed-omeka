@@ -31,7 +31,7 @@ function simple_nav()
 
     if($parent || ($page->title == "Ga zelf aan de slag")):
         $html .= "<li><a href='".url("/libco/libco/search")."'>Zoek online</a></li>";
-        $html .= "<li><a href='".url("/contribution")."'>Voeg object toe</a></li>";
+        $html .= "<li><a href='".url("/contribution")."'>Voeg item toe</a></li>";
     endif;
     $html .="</ul>";
 

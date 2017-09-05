@@ -10,7 +10,7 @@
         $query = "";
     endif;
 
-    $pageTitle = __('Zoek objecten online ') . __('(%s total)', $totalResults);
+    $pageTitle = __('Zoek items online ') . __('(%s total)', $totalResults);
     echo head(array('title' => $pageTitle));
 ?>
 <div class="container europeana">

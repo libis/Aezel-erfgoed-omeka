@@ -9,7 +9,7 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
     <!-- Content -->
     <div class="row">
       <div class="col-md-12">
-        <p id="simple-pages-breadcrumbs"><a href="<?php echo url("/");?>">Home</a> &gt; <a href="<?php echo url('/solr-search?=""');?>">Objecten</a> &gt; <?php echo $collectionTitle; ?></p>
+        <p id="simple-pages-breadcrumbs"><a href="<?php echo url("/");?>">Home</a> &gt; <a href="<?php echo url('/solr-search?=""');?>">Items</a> &gt; <?php echo $collectionTitle; ?></p>
         <h1><?php echo $collectionTitle; ?></h1>
       </div>
     </div>
