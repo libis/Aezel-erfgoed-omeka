@@ -21,7 +21,7 @@ if(get_option('contribution_user_profile_type') && plugin_is_active('UserProfile
     queue_css_string("input.add-element {display: block}");
 }
 
-$head = array('title' => 'Voeg een eigen object toe',
+$head = array('title' => 'Voeg een eigen item toe',
               'bodyclass' => 'contribution');
 echo head($head); ?>
 <script type="text/javascript">
@@ -42,7 +42,7 @@ echo head($head); ?>
                         <?php $session = new Zend_Session_Namespace;
                               $session->redirect = absolute_url();
                         ?>
-                        <p>Je moet een <a href='<?php echo url('guest-user/user/register'); ?>'>account aanmaken </a> of <a href='<?php echo url('guest-user/user/login'); ?>'>aanmelden</a> voor je een object kan toevoegen.</p>
+                        <p>Je moet <a href='<?php echo url('guest-user/user/register'); ?>'>registreren</a> of <a href='<?php echo url('guest-user/user/login'); ?>'>aanmelden</a> voor je een item kan toevoegen.</p>
                     <?php else: ?>
                         <form method="post" action="" enctype="multipart/form-data">
                             <fieldset id="contribution-item-metadata">
