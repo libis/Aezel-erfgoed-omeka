@@ -315,9 +315,9 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         $html = "";
         $widgetUserContent = array('label'=> __('Mijn content'));
         $html .= "<ul>";
-        $html .= "<li><a href='".url('admin/exhibits', array('owner' => current_user()->id))."'>" . __("Exhibits") . "</a></li>";
-        $html .= "<li><a href='".url('admin/items/browse', array('owner' => current_user()->id))."'>" . __("Objecten") . "</a></li>";
         $html .= "<li><a href='".url('admin/collections/browse', array('owner' => current_user()->id))."'>" . __("Collections") . "</a></li>";
+        $html .= "<li><a href='".url('admin/items/browse', array('owner' => current_user()->id))."'>Items</a></li>";
+        $html .= "<li><a href='".url('admin/exhibits', array('owner' => current_user()->id))."'>" . __("Exhibits") . "</a></li>";
         $html .= "</ul>";
         $widgetUserContent['content'] = $html;
         return $widgetUserContent;
