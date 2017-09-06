@@ -7002,6 +7002,93 @@ section.eigen .eigen-verhaal .img-in-text {
   border: none;
 }
 
+.map-section {
+  /* The map for the items page needs a bit of styling on it */
+}
+
+.map-section .geolocation-map {
+  line-height: normal;
+}
+
+.map-section #geolocation-browse {
+  clear: both;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+.map-section #map_browse {
+  height: 436px;
+}
+
+.map-section #map-links ul {
+  margin-left: 0;
+  padding: 0;
+}
+
+.map-section #map-links li {
+  overflow: hidden;
+  width: 100% !important;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.map-section #map-links {
+  padding: 10px 0 10px 0;
+}
+
+.map-section #map-links li a {
+  display: block;
+  text-decoration: none;
+  border-bottom: 0 !important;
+}
+
+.map-section #map-links h2:first-child {
+  margin-top: 0 !important;
+}
+
+.map-section #address_balloon dt {
+  font-weight: bold;
+}
+
+.map-section #address_balloon {
+  width: 100px;
+}
+
+.map-section div.map-notification {
+  display: block;
+  border: 1px dotted #ccc;
+  text-align: center;
+  font-size: 2em;
+}
+
+@media screen and (min-width: 768px) {
+  .map-section #map-links {
+    padding: 0;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    height: auto;
+    width: 100%;
+    float: left;
+    overflow-y: auto;
+    margin-bottom: 0 !important;
+  }
+  .map-section #map-links ul {
+    margin: 0;
+    padding: 0;
+  }
+  .map-section #map-links li {
+    overflow: hidden;
+  }
+  .map-section #map_browse {
+    float: left;
+    width: 100%;
+    margin-bottom: 0 !important;
+  }
+}
+
 /*general stuff*/
 #solr-search-form, #search-form-exhibit {
   padding-bottom: 2rem;
