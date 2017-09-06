@@ -42,7 +42,7 @@ echo head($head); ?>
                         <?php $session = new Zend_Session_Namespace;
                               $session->redirect = absolute_url();
                         ?>
-                        <p>Je moet <a href='<?php echo url('guest-user/user/register'); ?>'>registreren</a> of <a href='<?php echo url('guest-user/user/login'); ?>'>aanmelden</a> voor je een item kan toevoegen.</p>
+                        <p>Je moet <a href='<?php echo url('guest-user/user/register'); ?>'>registreren</a> of <a href='<?php echo url('guest-user/user/login'); ?>'>inloggen</a> voor je een item kan toevoegen.</p>
                     <?php else: ?>
                         <form method="post" action="" enctype="multipart/form-data">
                             <fieldset id="contribution-item-metadata">
