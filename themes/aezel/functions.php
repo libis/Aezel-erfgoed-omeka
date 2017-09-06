@@ -13,11 +13,11 @@ function simple_nav()
     $parent = false;
 
     $links = simple_pages_get_links_for_children_pages();
-    if (!$links) :
+    if (!$links  && $page->parent_id != "0") :
         $links = simple_pages_get_links_for_children_pages($page->parent_id);
     endif;
 
-    $html="<ul class='simple-nav'>";
+    $html="";
     foreach ($links as $link) :
         $html .= "<li><a href='".$link['uri']."'>".$link['label']."</a></li>";
     endforeach;
@@ -33,7 +33,10 @@ function simple_nav()
         $html .= "<li><a href='".url("/libco/libco/search")."'>Zoek online</a></li>";
         $html .= "<li><a href='".url("/contribution")."'>Voeg item toe</a></li>";
     endif;
-    $html .="</ul>";
+
+    if($html):
+      $html="<ul class='simple-nav'>".$html."</ul>";
+    endif;
 
     return $html;
 }
