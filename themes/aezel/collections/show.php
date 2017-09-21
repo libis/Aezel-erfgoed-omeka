@@ -9,17 +9,17 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
     <div class="row">
       <div class="col-sm-12">
         <div class='content browse'>
-          <p id="simple-pages-breadcrumbs"><a href="<?php echo url("/");?>">Home</a> &gt; <a href="<?php echo url('/solr-search?=""');?>">Items</a> &gt; <?php echo $collectionTitle; ?></p>
+          <p id="simple-pages-breadcrumbs"><a href="<?php echo url("/");?>">Home</a> &gt; <a href="<?php echo url('collections');?>">Collecties</a> &gt; <?php echo $collectionTitle; ?></p>
           <h1><?php echo $collectionTitle; ?></h1>
 
           <?php echo all_element_texts('collection'); ?>
 
           <div id="collection-items">
-            <h2><?php echo link_to_items_browse(__('Items in the %s Collection', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></h2>
+            <h2><a href="<?php echo url('/solr-search/?q=&facet=collection:%22'.$collectionTitle.'%22');?>"><?php echo __('Items in the %s Collection', $collectionTitle); ?></a></h2>
             <?php if (metadata('collection', 'total_items') > 0): ?>
                 <?php foreach (loop('items') as $item): ?>
                 <?php $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title'))); ?>
-                <div class="row">
+
                   <div class="item">
                     <?php if (metadata('item', 'has thumbnail')): ?>
                       <div class="col-md-2">
