@@ -7740,17 +7740,25 @@ section.eigen .eigen-verhaal .img-in-text {
   content: "";
 }
 
-.collections .item h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.4rem;
-  font-family: "Lato", sans-serif;
-}
-
 .collections .element {
   margin-bottom: 1.5rem;
 }
 
 .collections .element h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-family: "Lato", sans-serif;
+}
+
+.collections .item {
+  margin-bottom: 1.5rem;
+}
+
+.collections .item .item-img img {
+  width: 100%;
+}
+
+.collections .item h3 {
   margin-bottom: 0.5rem;
   font-size: 1.4rem;
   font-family: "Lato", sans-serif;
