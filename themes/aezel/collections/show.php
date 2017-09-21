@@ -19,10 +19,8 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
             <?php if (metadata('collection', 'total_items') > 0): ?>
                 <?php foreach (loop('items') as $item): ?>
                 <?php $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title'))); ?>
-                <div class="row item">
-                  <div class="col-sm-12">
-                    <h4><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h4>
-
+                <div class="row">
+                  <div class="item">
                     <?php if (metadata('item', 'has thumbnail')): ?>
                       <div class="col-md-2">
                         <div class="item-img">
@@ -31,6 +29,7 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
                       </div>
                     <?php endif; ?>
                     <div class="col-md-10">
+                      <h5><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h5>
                       <?php if ($text = metadata('item', array('Item Type Metadata', 'Text'), array('snippet'=>250))): ?>
                       <div class="item-description element">
                           <p><?php echo $text; ?></p>
