@@ -6323,6 +6323,10 @@ h3 span {
   border-bottom: 0 solid #666;
 }
 
+a {
+  transition: all 0.5s ease;
+}
+
 h1 {
   font-size: 2em;
   font-weight: 600;
@@ -6947,7 +6951,8 @@ section.eigen .eigen-verhaal .img-in-text {
 }
 
 .container .content {
-  padding: 3rem 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   background: #fff;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 1.1rem;
@@ -7188,6 +7193,32 @@ section.eigen .eigen-verhaal .img-in-text {
   padding-bottom: 1rem;
 }
 
+.exhibits .start {
+  text-align: right;
+}
+
+.exhibits .start a {
+  background: rgba(232, 57, 58, 0.9);
+  border-radius: 10px;
+  font-family: "Lato",sans-serif;
+  text-transform: uppercase;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 10px !important;
+}
+
+.exhibits .start a::after {
+  content: "\f105";
+  font-family: FontAwesome;
+  padding-left: 6px;
+}
+
+.exhibits .start a:hover {
+  text-decoration: none;
+  background: #e52223;
+}
+
 .exhibits .hTagcloud {
   margin-top: 0.2rem;
   font-family: "Lato", sans-serif;
@@ -7253,7 +7284,7 @@ section.eigen .eigen-verhaal .img-in-text {
 
 .exhibits #exhibit-page-navigation {
   font-family: "Lato", sans-serif;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 
 .solr-container .content {

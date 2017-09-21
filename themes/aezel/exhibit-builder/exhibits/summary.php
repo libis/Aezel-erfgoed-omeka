@@ -28,6 +28,9 @@
                 <?php echo $exhibitDescription; ?>
             </div>
             <?php endif; ?>
+            <div class="start">
+              <a href="<?php echo $exhibit->getFirstTopPage()->getRecordUrl();?>">Start tentoonstelling</a>
+            </div>
         </div>
 
         <div class="col-md-3 nav">
