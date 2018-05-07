@@ -1,0 +1,8 @@
+#waypoints{background:#fff;font-size:1.1rem;border-radius:2px;overflow-y:auto;color:#000;}
+#waypoints ul{margin:0;padding:0}
+#waypoints a.title{padding:.7rem 1rem;display:list-item;list-style:none;cursor:pointer;line-height:1.1rem;font-weight:300;}
+#waypoints a.title:hover{text-decoration:none}
+#waypoints a.title.highlighted{background:rgba(232,57,58,0.2)}
+#waypoints a.title.selected{background:#e8393a;color:#fff}
+#neatline #waypoints{max-width:300px;min-width:250px;max-height:80%;right:40px;top:40px;}
+#neatline #waypoints.empty{display:none}

@@ -7765,6 +7765,51 @@ section.eigen .eigen-verhaal .img-in-text {
   font-family: "Lato", sans-serif;
 }
 
+/* Neatline */
+.neatline-content {
+  margin: 0;
+  padding: 0;
+}
+
+.neatline-content .no-gutters {
+  padding: 0;
+  margin: 0;
+}
+
+.neatline-content .wrapper {
+  background: #f1f1f1;
+}
+
+.neatline-content .col-xs-12 {
+  padding: 0;
+  margin: 0;
+}
+
+.neatline-content h1 {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(232, 57, 58, 0.2);
+  margin-bottom: 1rem;
+}
+
+.neatline-content #neatline #static-bubble .item {
+  margin-bottom: 1rem;
+}
+
+.neatline-content #neatline #static-bubble .item-file {
+  margin-bottom: 1rem;
+}
+
+.neatline-content #neatline #static-bubble hr {
+  margin: 20px 0;
+  border-top: 1px solid rgba(232, 57, 58, 0.2);
+}
+
+.neatline-content .block {
+  padding: 2.5rem 2.5rem 5rem 2.5rem;
+  height: 800px;
+  overflow: auto;
+}
+
 footer {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-style: italic;
