@@ -15,7 +15,7 @@
 )); ?>
 <section class="metadata-section general-section exhibit-show-section">
   <div id="content" class='neatline-content container-fluid' role="main" tabindex="-1">
-          <div class="row row wrapper no-gutters">
+          <div class="row wrapper no-gutters">
             <!-- Exhibit and description : -->
             <?php echo nl_getNarrativeMarkup(); ?>
             <?php echo nl_getExhibitMarkup(); ?>
