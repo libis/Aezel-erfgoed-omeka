@@ -8,7 +8,7 @@
  */
 
 ?>
-
+<?php if(nl_getExhibitField('narrative')):?>
 <div class="col-md-3 col-xs-12 block">
   <!-- Exhibit title: -->
   <h1><?php echo nl_getExhibitField('title'); ?></h1>
@@ -20,3 +20,4 @@
   <?php //echo nl_getExhibitLink(null, 'fullscreen', __('View Fullscreen'), array('class' => 'nl-fullscreen')); ?>
   <?php echo nl_getExhibitField('narrative'); ?>
 </div>
+<?php endif;?>

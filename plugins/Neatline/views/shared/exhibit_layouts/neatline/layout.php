@@ -11,5 +11,5 @@ if (!$neatline) {
 set_current_record('neatline_exhibit', $neatline);
 
 ?>
-<iframe src="<?php echo nl_getExhibitUrl($neatline, "fullscreen")  ?>" seamless>
+<iframe scrolling="no" src="<?php echo nl_getExhibitUrl($neatline, "fullscreen")  ?>" seamless>
 </iframe>

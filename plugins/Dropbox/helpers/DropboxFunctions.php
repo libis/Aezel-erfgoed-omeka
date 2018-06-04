@@ -14,7 +14,7 @@ function dropbox_list()
  */
 function dropbox_get_files_dir_path()
 {
-    return DROPBOX_DIR . DIRECTORY_SEPARATOR . 'files';
+    return FILES_DIR . DIRECTORY_SEPARATOR . 'dropbox';
 }
 
 /**

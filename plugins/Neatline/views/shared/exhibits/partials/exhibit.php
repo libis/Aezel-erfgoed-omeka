@@ -8,8 +8,11 @@
  */
 
 ?>
-
+<?php if(nl_getExhibitField('narrative')):?>
   <div id="neatline" class="col-md-9 col-xs-12 <?php echo nl_getExhibitWidgetClasses(); ?>">
+<?php else:?>
+  <div id="neatline" class="col-md-12 col-xs-12 <?php echo nl_getExhibitWidgetClasses(); ?>">
+<?php endif;?>
     <div id="neatline-map" class="neatline-block"></div>
   </div>
 
